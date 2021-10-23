@@ -1,0 +1,4 @@
+{
+  "extends": ["wesbos"]
+  // All the eslint config in the npm package is here https://github.com/wesbos/eslint-config-wesbos
+}
