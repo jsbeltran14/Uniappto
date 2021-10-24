@@ -5,7 +5,7 @@ export const Home = () => {
     return (
         <div className="container">
             <div className="imagen">
-                <img  className="img" src="../images/Home.png"></img>
+                <img  className="img" alt="" src="../images/Home.png"></img>
             </div>
             <div className="card">
                 <h1> ¿Tienes pensado mudarte cerca del campus pero no sabes dónde? </h1>
