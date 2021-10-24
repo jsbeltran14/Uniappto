@@ -3,22 +3,21 @@ import { Navbar } from "./Components/Navbar/Navbar";
 import { Home } from "./Components/Home/Home";
 import { InicioSesion } from "./Components/InicioSesion/InicioSesion";
 import { Rommie } from "./Components/Rommies/Rommie";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
   return (
     <Router>
-      <Navbar/>
+      <Navbar />
       <Switch>
         <Route path="/" exact>
-          <Home/>
+          <Home />
         </Route>
         <Route path="/login">
-          <InicioSesion/>
+          <InicioSesion />
         </Route>
         <Route path="/roomies">
-          <Rommie/>
+          <Rommie />
         </Route>
       </Switch>
     </Router>
