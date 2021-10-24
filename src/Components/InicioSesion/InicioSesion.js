@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { Input } from "../Input/Input";
-import './styles.css'
+import './styles.css';
+import { Link } from "react-router-dom";
 
 export const InicioSesion = () => {
 
@@ -51,7 +52,9 @@ export const InicioSesion = () => {
                 }}
                 handleChange={handleChange}
                 />
+                <Link to="/roomies">
                 <button onClick={handleSubmit} className="login__button">Ingresar</button>
+                </Link>
 
             </div>
         </div>

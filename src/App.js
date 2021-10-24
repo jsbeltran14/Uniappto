@@ -3,14 +3,25 @@ import { Navbar } from "./Components/Navbar/Navbar";
 import { Home } from "./Components/Home/Home";
 import { InicioSesion } from "./Components/InicioSesion/InicioSesion";
 import { Rommie } from "./Components/Rommies/Rommie";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 
 function App() {
   return (
-    <>
+    <Router>
       <Navbar/>
-      <Home/>
-    </>
+      <Switch>
+        <Route path="/" exact>
+          <Home/>
+        </Route>
+        <Route path="/login">
+          <InicioSesion/>
+        </Route>
+        <Route path="/roomies">
+          <Rommie/>
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
