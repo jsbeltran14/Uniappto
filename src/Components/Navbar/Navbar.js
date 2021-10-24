@@ -14,10 +14,10 @@ export const Navbar = () => {
             </div>
             <div className="info">
                 <div>
-                    <Link to="/" className="info__item">viviendas favoritas</Link>
+                <Link to="/" className="info__item">viviendas favoritas</Link>
                 </div>
                 <div>
-                    <a href="!#" className="info__item">chat</a>
+                <Link to="/chat" className="info__item">chat</Link>
                 </div>
                 <div>
                     <a href="!#" className="info__item">editar perfil</a>
