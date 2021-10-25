@@ -3,7 +3,7 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
-<<<<<<< HEAD
+
     return (
         <div className="header">
             <div className="inicio">
