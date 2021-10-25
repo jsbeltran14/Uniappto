@@ -1,11 +1,13 @@
 .header {
-  padding: 9px 9px;
+  padding: 0.5625rem 0.5625rem;
   margin: 0 auto;
-  height: 50px;
+  height: 3.125rem;
   display: flex;
   flex-direction: row;
   background-color: #ededed;
   justify-content: space-between;
+  font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial,
+    sans-serif;
 }
 
 .info {
@@ -16,15 +18,14 @@
 
 .info__item {
   text-decoration: none;
-  margin-right: 12px;
-  font-style: normal;
-  line-height: 9px;
+  margin-right: 0.75rem;
+  line-height: 0.5625rem;
   color: black;
   text-align: left;
 }
 
 .inicio {
   display: flex;
-  font-family: Roboto;
+
   color: #000000;
 }

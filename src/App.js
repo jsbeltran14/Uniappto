@@ -21,7 +21,7 @@ function App() {
           <Rommie />
         </Route>
         <Route path="/chat">
-          <Chat/>
+          <Chat />
         </Route>
       </Switch>
     </Router>

@@ -17,21 +17,25 @@ export const InicioSesion = () => {
   }
 
   const login = async () => {
-    const resp = await fetch(`${apiOrigin}/login`, {
-      method: "POST",
-      body: JSON.stringify({ email: email, password: password }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    return resp.json();
+    try {
+      const resp = await fetch(`${apiOrigin}/login`, {
+        method: "POST",
+        body: JSON.stringify({ email: email, password: password }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      return resp.json();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleSubmit = async () => {
     const account = { email, password };
     if (account) {
       const data = await login();
-      console.log(data);
+      sessionStorage.setItem("current_user", data);
       sessionStorage.setItem("token", data.token);
     }
   };
@@ -57,7 +61,7 @@ export const InicioSesion = () => {
           attribute={{
             id: "contraseña",
             name: "contraseña",
-            type: "text",
+            type: "password",
             placeholder: "Ingrese su contraseña",
           }}
           handleChange={handleChange}
@@ -66,6 +70,7 @@ export const InicioSesion = () => {
           <button onClick={handleSubmit} className="login__button">
             Ingresar
           </button>
+          {/* TODO: Just authenticated users*/}
         </Link>
       </div>
     </div>

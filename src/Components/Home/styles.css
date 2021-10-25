@@ -52,7 +52,8 @@ h2 {
   margin-right: 2rem;
   margin-left: 2rem;
   margin-bottom: 2rem;
-  font-family: roboto;
+  font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial,
+    sans-serif;
 }
 
 .registrar__item {
