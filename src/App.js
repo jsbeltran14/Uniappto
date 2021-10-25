@@ -3,6 +3,7 @@ import { Navbar } from "./Components/Navbar/Navbar";
 import { Home } from "./Components/Home/Home";
 import { InicioSesion } from "./Components/InicioSesion/InicioSesion";
 import { Rommie } from "./Components/Rommies/Rommie";
+import { Chat } from "./Components/Chat/Chat";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -18,6 +19,9 @@ function App() {
         </Route>
         <Route path="/roomies">
           <Rommie />
+        </Route>
+        <Route path="/chat">
+          <Chat/>
         </Route>
       </Switch>
     </Router>
