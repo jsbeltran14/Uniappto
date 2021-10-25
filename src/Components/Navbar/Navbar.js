@@ -1,8 +1,9 @@
-import React from 'react';
+import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 
 export const Navbar = () => {
+<<<<<<< HEAD
     return (
         <div className="header">
             <div className="inicio">
@@ -23,6 +24,10 @@ export const Navbar = () => {
                     <a href="!#" className="info__item">editar perfil</a>
                 </div>
             </div>
+
+          <a href="!#" className="info__item">
+            Configuraciones
+          </a>
         </div>
-    )
-}
+  );
+};

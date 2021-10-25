@@ -49,8 +49,8 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-// GetOne by username
-router.get('/:username', checkToken, async (req, res) => {
+// GetOne by email
+router.get('/:email', checkToken, async (req, res) => {
   const { username } = req.params;
   const user = await getUserByEmail(username);
   res.json(user);
