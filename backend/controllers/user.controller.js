@@ -1,6 +1,7 @@
-const jwt = require('jsonwebtoken'); // TODO
+const jwt = require('jsonwebtoken');
 const bcryptjs = require('bcryptjs');
 const { getDbRef } = require('../lib/mongo');
+const { ObjectID, ObjectId } = require('bson');
 
 const COLLECTION_NAME = 'users';
 
@@ -38,7 +39,15 @@ const getUserById = async (id) => {
 
 async function createUser(user) {
   try {
-    const { username, password, email } = user;
+    const {
+      username,
+      password,
+      email,
+      university,
+      semester,
+      age,
+      phoneNumber,
+    } = user;
     if (!emailExists(email)) {
       return {
         success: false,
@@ -54,8 +63,13 @@ async function createUser(user) {
     return {
       success: true,
       data: {
-        username,
-        email,
+        username: username,
+        email: email,
+        university: university,
+        semester: semester,
+        age: age,
+        phone_number: phoneNumber,
+        id_apartment: null,
       },
       token,
     };
@@ -75,7 +89,17 @@ const deleteUser = async (id, res) => {
     .catch((error) => console.error(error));
 };
 
-const updateUser = async (id, username, password, email, idApartment) => {
+const updateUser = async (
+  id,
+  username,
+  password,
+  email,
+  idApartment,
+  university,
+  semester,
+  age,
+  phoneNumber
+) => {
   await getDbRef()
     .collection(COLLECTION_NAME)
     .findOneAndUpdate(
@@ -85,8 +109,28 @@ const updateUser = async (id, username, password, email, idApartment) => {
           username: username,
           password: password,
           email: email,
+          university: university,
+          semester: semester,
+          age: age,
+          phone_number: phoneNumber,
           id_apartment: idApartment,
         },
+      },
+      { upsert: true }
+    )
+    .catch((error) => console.error(error));
+};
+
+const updateUserApartment = async (id, idApartment) => {
+  const currentUser = await getUserById(id);
+  currentUser['id_apartment'] = idApartment;
+
+  await getDbRef()
+    .collection(COLLECTION_NAME)
+    .findOneAndUpdate(
+      { _id: id },
+      {
+        $set: currentUser,
       },
       { upsert: true }
     )
@@ -100,4 +144,5 @@ module.exports = {
   getUserById,
   deleteUser,
   updateUser,
+  updateUserApartment,
 };

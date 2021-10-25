@@ -30,8 +30,9 @@ export const InicioSesion = () => {
   const handleSubmit = async () => {
     const account = { email, password };
     if (account) {
-      const msg = await login();
-      console.log(msg);
+      const data = await login();
+      console.log(data);
+      sessionStorage.setItem("token", data.token);
     }
   };
 

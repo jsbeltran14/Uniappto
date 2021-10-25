@@ -13,6 +13,7 @@ const {
   getUserById,
   deleteUser,
   updateUser,
+  updateUserApartment,
 } = require('../controllers/user.controller');
 
 const userValidator = (user) => {
@@ -80,6 +81,13 @@ router.put('/:id', checkToken, async (req, res, next) => {
 
   await updateUser(id, req.body.username, req.body.password, req.body.correo);
   res.end(`User ${req.params.id} updated`);
+});
+
+// Update Apartment User
+router.put('/apartment/:id', checkToken, async (req, res, next) => {
+  const id = ObjectId(req.params.id);
+  await updateUserApartment(id, req.body.id_apartment);
+  res.end(`User ${req.params.id} apartment updated`);
 });
 
 module.exports = router;

@@ -13,7 +13,6 @@ async function login(user) {
       const validation = bcryptjs.compareSync(password, currentUser.password);
 
       if (validation) {
-        console.log('xd');
         const token = jwt.sign({ email: currentUser.email }, jwtKey, {
           expiresIn: '24h',
         });
@@ -24,6 +23,11 @@ async function login(user) {
           data: {
             username: currentUser.username,
             email: currentUser.email,
+            university: currentUser.university,
+            semester: currentUser.semester,
+            age: currentUser.age,
+            phone_number: currentUser.phone_number,
+            id_apartment: currentUser.id_apartment,
           },
         };
       }
