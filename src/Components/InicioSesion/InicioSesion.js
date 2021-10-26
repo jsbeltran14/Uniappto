@@ -3,7 +3,7 @@ import { Input } from "../Input/Input";
 import "./styles.css";
 import { Link } from "react-router-dom";
 
-export const InicioSesion = () => {
+export const InicioSesion = ({ setIsLogged }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -35,8 +35,10 @@ export const InicioSesion = () => {
     const account = { email, password };
     if (account) {
       const data = await login();
-      sessionStorage.setItem("current_user", data);
-      sessionStorage.setItem("token", data.token);
+      if (data.success === true) {
+        sessionStorage.setItem("current_user", JSON.stringify(data));
+        sessionStorage.setItem("token", data.token);
+      }
     }
   };
 

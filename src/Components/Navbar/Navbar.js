@@ -14,17 +14,17 @@ export const Navbar = () => {
       <div className="info">
         <div>
           <Link to="/" className="info__item">
-            Viviendas favoritas
+            <strong>Viviendas favoritas</strong>
           </Link>
         </div>
         <div>
           <Link to="/chat" className="info__item">
-            Chat
+            <strong>Chat</strong>
           </Link>
         </div>
         <div>
           <a href="!#" className="info__item">
-            Editar perfil
+            <strong>Editar perfil</strong>
           </a>
         </div>
       </div>

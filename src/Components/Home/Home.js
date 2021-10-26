@@ -15,7 +15,7 @@ export const Home = () => {
           preferidos!
         </h2>
         <Link to="/login">
-          <button className>Iniciar Sesion</button>
+          <button>Iniciar Sesion</button>
         </Link>
         <div className="registrar">
           <p className="registrar__item">¿No tienes cuenta?</p>

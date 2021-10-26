@@ -3,11 +3,8 @@
   margin: 0 auto;
   height: 3.125rem;
   display: flex;
-  flex-direction: row;
   background-color: #ededed;
   justify-content: space-between;
-  font-family: SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial,
-    sans-serif;
 }
 
 .info {
@@ -18,14 +15,18 @@
 
 .info__item {
   text-decoration: none;
-  margin-right: 0.75rem;
+  margin-right: 2rem;
   line-height: 0.5625rem;
   color: black;
   text-align: left;
+  padding: 0.125rem;
+}
+
+.info__item:hover {
+  border-bottom: 0.125rem solid black;
 }
 
 .inicio {
   display: flex;
-
   color: #000000;
 }
