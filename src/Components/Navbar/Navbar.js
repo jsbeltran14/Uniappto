@@ -23,11 +23,11 @@ export const Navbar = () => {
                 <div>
                     <a href="!#" className="info__item">editar perfil</a>
                 </div>
+                <div>
+                    <a href="!#" className="info__item">configuracion</a>
+                </div>
             </div>
 
-          <a href="!#" className="info__item">
-            Configuraciones
-          </a>
         </div>
-  );
+  );  
 };

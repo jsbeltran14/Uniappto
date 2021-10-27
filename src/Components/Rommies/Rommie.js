@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles.css';
+import { Link } from "react-router-dom";
 
 
 export const Rommie = () => {
@@ -8,10 +9,14 @@ export const Rommie = () => {
         <>
         <div className="hero__container">
             <div className="seccion__hero ">
+                <Link to="viviendas">
                 <h1>Viviendas</h1>
+                </Link>
             </div>
             <div className="seccion__hero ">
+                <Link to="roomies">
                 <h1 className="hero__active">Roomies</h1>
+                </Link>
             </div>
         </div>
         <div className="roomie__container">
