@@ -37,6 +37,7 @@ export const InicioSesion = ({ setIsLogged }) => {
       const data = await login();
       if (data.success === true) {
         sessionStorage.setItem("current_user", JSON.stringify(data));
+        console.log(data);
         sessionStorage.setItem("token", data.token);
       }
     }
@@ -45,7 +46,7 @@ export const InicioSesion = ({ setIsLogged }) => {
   return (
     <div className="container__login">
       <div className="login__titulo">
-        <h1>Inicia Sesion</h1>
+        <h1>Inicia sesión</h1>
       </div>
       <div className="login__card">
         <h2>Email o Telefono</h2>
@@ -54,7 +55,7 @@ export const InicioSesion = ({ setIsLogged }) => {
             id: "email",
             name: "email",
             type: "text",
-            placeholder: "Ingrese su Email o Numero",
+            placeholder: "Email o número telefónico",
           }}
           handleChange={handleChange}
         />
@@ -64,7 +65,7 @@ export const InicioSesion = ({ setIsLogged }) => {
             id: "contraseña",
             name: "contraseña",
             type: "password",
-            placeholder: "Ingrese su contraseña",
+            placeholder: "Contraseña",
           }}
           handleChange={handleChange}
         />
