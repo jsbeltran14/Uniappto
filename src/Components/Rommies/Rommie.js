@@ -1,12 +1,9 @@
-<<<<<<< HEAD
+
 import React from 'react';
 import './styles.css';
 import { Link } from "react-router-dom";
 
-=======
-import React from "react";
-import "./styles.css";
->>>>>>> main
+
 
 export const Rommie = () => {
   const isAuthenticated = sessionStorage.getItem("token") !== null;
