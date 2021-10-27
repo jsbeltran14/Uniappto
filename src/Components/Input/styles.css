@@ -1,4 +1,5 @@
 .form__input {
+  padding: 4%;
   border: 0.09rem solid #8a8a8a;
   box-sizing: border-box;
   border-radius: 0.5rem;

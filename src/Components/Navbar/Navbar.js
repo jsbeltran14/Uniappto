@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 export const Navbar = () => {
 
+
     return (
         <div className="header">
             <div className="inicio">
@@ -30,4 +31,5 @@ export const Navbar = () => {
 
         </div>
   );  
+
 };

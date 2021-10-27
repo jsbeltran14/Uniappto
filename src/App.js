@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Navbar } from "./Components/Navbar/Navbar";
 import { Home } from "./Components/Home/Home";
 import { InicioSesion } from "./Components/InicioSesion/InicioSesion";
@@ -8,6 +8,7 @@ import { Viviendas } from "./Components/Viviendas/Viviendas";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
+  const [isLogged, setIsLogged] = useState(false);
   return (
     <Router>
       <Navbar />
@@ -16,13 +17,13 @@ function App() {
           <Home />
         </Route>
         <Route path="/login">
-          <InicioSesion />
+          <InicioSesion setIsLogged={setIsLogged} />
         </Route>
         <Route path="/roomies">
-          <Rommie />
+          <Rommie isLogged={isLogged} />
         </Route>
         <Route path="/chat">
-          <Chat/>
+          <Chat isLogged={isLogged} />
         </Route>
         <Route path="/viviendas">
           <Viviendas/>

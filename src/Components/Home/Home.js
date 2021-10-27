@@ -10,12 +10,12 @@ export const Home = () => {
       </div>
       <div className="card">
         <h1> ¿Tienes pensado mudarte cerca del campus pero no sabes dónde? </h1>
-        <h2>
+        <h3>
           ¡Encuentra la mejor opción de vivienda universitaria con tus roomies
           preferidos!
-        </h2>
+        </h3>
         <Link to="/login">
-          <button className>Iniciar Sesion</button>
+          <button>Iniciar Sesion</button>
         </Link>
         <div className="registrar">
           <p className="registrar__item">¿No tienes cuenta?</p>

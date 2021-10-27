@@ -1,9 +1,8 @@
 .header {
-  padding: 9px 9px;
+  padding: 0.5625rem 0.5625rem;
   margin: 0 auto;
-  height: 50px;
+  height: 3.125rem;
   display: flex;
-  flex-direction: row;
   background-color: #ededed;
   justify-content: space-between;
 }
@@ -16,15 +15,18 @@
 
 .info__item {
   text-decoration: none;
-  margin-right: 12px;
-  font-style: normal;
-  line-height: 9px;
+  margin-right: 2rem;
+  line-height: 0.5625rem;
   color: black;
   text-align: left;
+  padding: 0.125rem;
+}
+
+.info__item:hover {
+  border-bottom: 0.125rem solid black;
 }
 
 .inicio {
   display: flex;
-  font-family: Roboto;
   color: #000000;
 }
