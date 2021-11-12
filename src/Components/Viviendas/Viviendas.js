@@ -1,9 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { Input } from "../Input/Input";
+import { CardVivienda } from "../CardVivienda/CardVivienda";
 import './viviendas.css'
 
-export const Viviendas = () => {
+
+export default function Viviendas() {
+
+    let [viviendasDisp, setviviendasDisp] = useState(null);
+
+    useEffect(() => {
+        fetch("/api/apartments")
+        .then((response) => response.json())
+        .then((data) => setviviendasDisp(data));
+    }, []);
+
     return (
         <div>
         <div className="hero__container">
@@ -67,70 +78,17 @@ export const Viviendas = () => {
                 
             </div>
             <div className="list__viviendas__container">
-                <div className="vivienda__container">
-                    <img src="../images/vivienda.jpg" alt="" />
-                    <div className="detalles__vivienda__container">
-                        <div className="detalles__vivienda">
-                            <div className="detalle__container">
-                                <p className="titulo">precio de arriendo</p>
-                                <p className="valor">$ 2.000.000</p>
-                            </div>
-                            <div className="detalle__container">
-                                <p className="titulo">area</p>
-                                <p className="valor">65m</p>
-                            </div>
-                            <div className="detalle__container">
-                                <p className="titulo">hab</p>
-                                <p className="valor">2</p>
-                            </div>
-                            <div className="detalle__container">
-                                <p className="titulo">baños</p>
-                                <p className="valor">2</p>
-                            </div>
-                        </div>
-                        <div className="iconos__viviendas">
-                            <div className="favoritos__container">
-                                <p className="titulo">añadir a favoritos</p>
-                                <span className="fa fa-heart-o positive"></span>
-                            </div>
-                            <div className="favoritos__container">
-                                <button className="contactar__btn">contactar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="vivienda__container">
-                    <img src="../images/vivienda.jpg" alt="" />
-                    <div className="detalles__vivienda__container">
-                        <div className="detalles__vivienda">
-                            <div className="detalle__container">
-                                <p className="titulo">precio de arriendo</p>
-                                <p className="valor">$ 2.000.000</p>
-                            </div>
-                            <div className="detalle__container">
-                                <p className="titulo">area</p>
-                                <p className="valor">65m</p>
-                            </div>
-                            <div className="detalle__container">
-                                <p className="titulo">hab</p>
-                                <p className="valor">2</p>
-                            </div>
-                            <div className="detalle__container">
-                                <p className="titulo">baños</p>
-                                <p className="valor">2</p>
-                            </div>
-                        </div>
-                        <div className="iconos__viviendas">
-                            <div className="favoritos__container">
-                                <p className="titulo">añadir a favoritos</p>
-                                <span className="fa fa-heart-o positive"></span>
-                            </div>
-                            <div className="favoritos__container">
-                                <button className="contactar__btn">contactar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                
+            {viviendasDisp && viviendasDisp.map((element) => (
+                <CardVivienda
+                picture_url={element.picture_url}
+                price={element.price}
+                area={element.area}
+                bedrooms={element.bedrooms}
+                bathrooms={element.bathrooms}
+                />
+            ))}
+
                 <div className="vivienda__container">
                     <img src="../images/vivienda.jpg" alt="" />
                     <div className="detalles__vivienda__container">
@@ -168,3 +126,6 @@ export const Viviendas = () => {
         </div>
     )
 }
+
+
+
