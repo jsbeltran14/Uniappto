@@ -66,7 +66,7 @@ export default function Rommie(){
                 university={element.university}
                 career={element.career}
                 semester={element.semester}
-                picture_url={element.picture_url}
+                pic_url={element.pic_url}
                 />  
                 
               </TinderCard>    

@@ -8,14 +8,14 @@ export const CardRoomie = (props) => {
         university,
         career,
         semester,
-        picture_url
+        pic_url
     } = props;
 
     return (
         
         <div className="card__roomie">
             <div className="img__card">
-              <img alt="" src={picture_url} />
+              <img alt="" src={pic_url} />
             </div>
             <div className="info__personal__card">
               <h1> {username} </h1>
