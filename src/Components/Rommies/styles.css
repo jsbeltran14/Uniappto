@@ -18,6 +18,14 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  height: 500px;
+}
+
+.roomies__container{
+  
+  flex: 0.6;
+  justify-content: center;
+  
 }
 
 .card__roomie {
@@ -33,6 +41,8 @@
   margin-right: 5rem;
   width: 350px;
   height: 550px;
+  box-shadow: 0 20px 25px 0 rgba(0,0,0,0.356);
+  
 }
 
 .img__card img {
@@ -50,6 +60,7 @@
 
 .info__personal__card h1 {
   margin-top: 13px;
+  font-size: 25px;
 }
 
 .info__card__roomie {
@@ -70,9 +81,17 @@
 }
 
 .negative {
+  
   color: #fc9295;
 }
 
+.fa-5x{
+  flex: 0.2;
+}
+
 .swipe{
-   position: absolute; 
+	position: absolute;
+	top: calc(50% - 20%);
+	left: calc(50% - 20%);
+ 
 }

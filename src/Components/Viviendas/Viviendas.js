@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "../Input/Input";
-import ViviendaItem from "./ViviendaItem";
+import { CardVivienda } from "../CardVivienda/CardVivienda";
 import "./viviendas.css";
 
 export const Viviendas = () => {
@@ -115,17 +115,19 @@ export const Viviendas = () => {
                 housing_type,
                 stratum,
                 zone,
+                picture_url
               }) =>
                 housing_type.startsWith(tipo) &&
                 (estrato === 0 || estrato === stratum) &&
                 zone.startsWith(zona) &&
                 (presupuesto === 0 || presupuesto === price) && (
-                  <ViviendaItem
+                  <CardVivienda
                     key={_id}
+                    picture_url={picture_url}
                     price={price}
                     area={area_mtsc}
-                    bathrooms={bathrooms}
                     bedrooms={bedrooms}
+                    bathrooms={bathrooms}
                   />
                 )
             )}

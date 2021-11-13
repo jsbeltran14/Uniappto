@@ -10,14 +10,21 @@ import { CardRoomie } from "../CardRoomie/CardRoomie";
 
 export default function Rommie(){
   const isAuthenticated = sessionStorage.getItem("token") !== null;
+  const token = sessionStorage.getItem("token");
+  const apiOrigin = "http://localhost:3001/";
 
   let [roomieDisp, setroomieDisp] = useState(null);
 
   useEffect(() => {
-      fetch("/api/users")
-      .then((response) => response.json())
-      .then((data) => setroomieDisp(data));
-  }, []);
+    fetch(`${apiOrigin}api/users`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((data) => data.json())
+      .then((res) => setroomieDisp(res));
+  }, [token]);
+
 
   return (
     isAuthenticated && (
@@ -49,10 +56,11 @@ export default function Rommie(){
             {roomieDisp && roomieDisp.map((element) => (
               <TinderCard 
               className="swipe"
-              key={element.name}
+              key={element._id}
               preventSwipe={['up','down']}
               >
                 <CardRoomie
+                key={element._id}
                 username={element.username}
                 age={element.age}
                 university={element.university}

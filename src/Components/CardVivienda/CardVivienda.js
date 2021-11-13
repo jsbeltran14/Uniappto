@@ -13,7 +13,7 @@ export const CardVivienda = (props) => {
 
     return (
         <div className="vivienda__container">
-            <img src={picture_url} alt="" />
+            <img src="../images/vivienda.jpg" alt="" />
             <div className="detalles__vivienda__container">
                 <div className="detalles__vivienda">
                     <div className="detalle__container">

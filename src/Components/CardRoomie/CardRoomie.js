@@ -24,7 +24,7 @@ export const CardRoomie = (props) => {
             <div className="info__card__roomie">
               <p>{university}</p>
               <p>{career}</p>
-              <p>{semester}</p>
+              <p>{semester} Semestre</p>
             </div>
             <div className="icons__card__roomie">
               <div>
