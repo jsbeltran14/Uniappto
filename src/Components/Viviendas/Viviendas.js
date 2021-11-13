@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "../Input/Input";
+import ViviendaItem from "./ViviendaItem";
 import "./viviendas.css";
 
 export const Viviendas = () => {
+  const token = sessionStorage.getItem("token");
+  const apiOrigin = "http://localhost:3001/";
+  const [apartamentos, setApartamentos] = useState([]);
+
+  // state filters
+  const [zona, setZona] = useState("");
+  const [presupuesto, setPresupuesto] = useState(0);
+  const [tipo, setTipo] = useState("");
+  const [estrato, setEstrato] = useState(0);
+
+  // filters handlers
+  const handleChangeZonaInput = (event) => {
+    setZona(event.target.value);
+  };
+  const handleChangePresupuestoInput = (event) => {
+    setPresupuesto(Number(event.target.value));
+  };
+  const handleChangeTipoInput = (event) => {
+    setTipo(event.target.value);
+  };
+  const handleChangeEstratoInput = (event) => {
+    setEstrato(Number(event.target.value));
+  };
+
+  useEffect(() => {
+    fetch(`${apiOrigin}api/apartments`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((data) => data.json())
+      .then((res) => setApartamentos(res));
+  }, [token]);
+
   return (
     <div>
       <div className="hero__container">
@@ -29,6 +64,7 @@ export const Viviendas = () => {
               type: "text",
               placeholder: "zona",
             }}
+            handleChange={handleChangeZonaInput}
           />
 
           <Input
@@ -38,6 +74,7 @@ export const Viviendas = () => {
               type: "text",
               placeholder: "presupuesto",
             }}
+            handleChange={handleChangePresupuestoInput}
           />
 
           <Input
@@ -47,6 +84,7 @@ export const Viviendas = () => {
               type: "text",
               placeholder: "tipo inmueble",
             }}
+            handleChange={handleChangeTipoInput}
           />
 
           <Input
@@ -56,107 +94,37 @@ export const Viviendas = () => {
               type: "text",
               placeholder: "estrato",
             }}
+            handleChange={handleChangeEstratoInput}
           />
 
           <button className="filter__button">Ingresar</button>
         </div>
         <div className="list__viviendas__container">
-          <div className="vivienda__container">
-            <img src="../images/vivienda.jpg" alt="" />
-            <div className="detalles__vivienda__container">
-              <div className="detalles__vivienda">
-                <div className="detalle__container">
-                  <p className="titulo">Arriendo</p>
-                  <p className="valor">$ 2.000.000</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Area</p>
-                  <p className="valor">65m</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Habitaciones</p>
-                  <p className="valor">2</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Baños</p>
-                  <p className="valor">2</p>
-                </div>
-              </div>
-              <div className="iconos__viviendas">
-                <div className="favoritos__container">
-                  <p className="titulo">añadir a favoritos</p>
-                  <span className="fa fa-heart-o positive"></span>
-                </div>
-                <div className="favoritos__container">
-                  <button className="contactar__btn">contactar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="vivienda__container">
-            <img src="../images/vivienda.jpg" alt="" />
-            <div className="detalles__vivienda__container">
-              <div className="detalles__vivienda">
-                <div className="detalle__container">
-                  <p className="titulo">Arriendo</p>
-                  <p className="valor">$ 2.000.000</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Area</p>
-                  <p className="valor">65m</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Habitaciones</p>
-                  <p className="valor">2</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Baños</p>
-                  <p className="valor">2</p>
-                </div>
-              </div>
-              <div className="iconos__viviendas">
-                <div className="favoritos__container">
-                  <p className="titulo">añadir a favoritos</p>
-                  <span className="fa fa-heart-o positive"></span>
-                </div>
-                <div className="favoritos__container">
-                  <button className="contactar__btn">contactar</button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="vivienda__container">
-            <img src="../images/vivienda.jpg" alt="" />
-            <div className="detalles__vivienda__container">
-              <div className="detalles__vivienda">
-                <div className="detalle__container">
-                  <p className="titulo">Arriendo</p>
-                  <p className="valor">$ 2.000.000</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Area</p>
-                  <p className="valor">65m</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Habitaciones</p>
-                  <p className="valor">2</p>
-                </div>
-                <div className="detalle__container">
-                  <p className="titulo">Baños</p>
-                  <p className="valor">2</p>
-                </div>
-              </div>
-              <div className="iconos__viviendas">
-                <div className="favoritos__container">
-                  <p className="titulo">añadir a favoritos</p>
-                  <span className="fa fa-heart-o positive"></span>
-                </div>
-                <div className="favoritos__container">
-                  <button className="contactar__btn">contactar</button>
-                </div>
-              </div>
-            </div>
-          </div>
+          {apartamentos &&
+            apartamentos.map(
+              ({
+                _id,
+                price,
+                bathrooms,
+                bedrooms,
+                area_mtsc,
+                housing_type,
+                stratum,
+                zone,
+              }) =>
+                housing_type.startsWith(tipo) &&
+                (estrato === 0 || estrato === stratum) &&
+                zone.startsWith(zona) &&
+                (presupuesto === 0 || presupuesto === price) && (
+                  <ViviendaItem
+                    key={_id}
+                    price={price}
+                    area={area_mtsc}
+                    bathrooms={bathrooms}
+                    bedrooms={bedrooms}
+                  />
+                )
+            )}
         </div>
       </div>
     </div>

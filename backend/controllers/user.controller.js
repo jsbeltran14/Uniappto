@@ -1,5 +1,6 @@
 const UserModel = require('../models/users');
 const { ObjectId } = require('bson');
+const bcryptjs = require('bcryptjs');
 
 const UserController = {
   all: async (req, res) => {
@@ -20,7 +21,10 @@ const UserController = {
     return found;
   },
   create: async (req, res) => {
-    const newUser = new UserModel(req.body);
+    const salt = bcryptjs.genSaltSync();
+    const currentUser = req.body;
+    currentUser.password = bcryptjs.hashSync(currentUser.password, salt);
+    const newUser = new UserModel(currentUser);
     const savedUser = await newUser.save();
     res.json(savedUser);
   },

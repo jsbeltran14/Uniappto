@@ -12,7 +12,9 @@ const ApartmentSchema = new Schema({
   picture_url: { type: String },
   bathrooms: { type: Number, required: true, min: 1 },
   bedrooms: { type: Number, required: true, min: 0 },
-  area_mtsc: { type: Number, required: true, min: 0},
+  area_mtsc: { type: Number, required: true, min: 0 },
+  stratum: { type: Number, required: true, min: 0 },
+  zone: { type: String, required: true },
   inhabitans: [{ type: Schema.Types.ObjectId, ref: 'User' }],
 });
 

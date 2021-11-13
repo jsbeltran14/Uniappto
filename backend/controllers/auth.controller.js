@@ -11,7 +11,12 @@ async function login(user) {
     try {
       const users = await UserModel.find({ email: email });
       currentUser = users[0];
-      if (password === currentUser.password && email === currentUser.email) {
+
+      const passValidator = bcryptjs.compareSync(
+        password,
+        currentUser.password
+      );
+      if (passValidator && email === currentUser.email) {
         const token = jwt.sign({ email: currentUser.email }, jwtKey, {
           expiresIn: '24h',
         });
