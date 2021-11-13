@@ -1,18 +1,17 @@
 const bcryptjs = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const UserModel = require('../models/users');
 
 const jwtKey = process.env.JSON_TOKEN;
-const { getUserByEmail } = require('./user.controller');
 
 async function login(user) {
   const { email, password } = user;
 
   if (email && password) {
     try {
-      const currentUser = await getUserByEmail(email);
-      const validation = bcryptjs.compareSync(password, currentUser.password);
-
-      if (validation) {
+      const users = await UserModel.find({ email: email });
+      currentUser = users[0];
+      if (password === currentUser.password && email === currentUser.email) {
         const token = jwt.sign({ email: currentUser.email }, jwtKey, {
           expiresIn: '24h',
         });
@@ -21,13 +20,16 @@ async function login(user) {
           msg: 'Logged successfully',
           token,
           data: {
-            username: currentUser.username,
+            age: currentUser.age,
+            career: currentUser.career,
             email: currentUser.email,
+            pic_url: currentUser.pic_url,
+            username: currentUser.username,
             university: currentUser.university,
             semester: currentUser.semester,
-            age: currentUser.age,
-            phone_number: currentUser.phone_number,
-            id_apartment: currentUser.id_apartment,
+            user_likes: currentUser.user_likes,
+            liked_tags: currentUser.liked_tags,
+            disliked_tags: currentUser.disliked_tags,
           },
         };
       }
