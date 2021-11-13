@@ -1,93 +1,36 @@
 const express = require('express');
 
 const router = express.Router();
-const Joi = require('joi');
-const { ObjectId } = require('bson');
-
 const { checkToken } = require('../middlewares/jwt-validator');
 
 const {
-  getAllUsers,
-  createUser,
-  getUserByEmail,
-  getUserById,
-  deleteUser,
-  updateUser,
-  updateUserApartment,
+  all,
+  find,
+  create,
+  createDislikedTag,
+  createLikedTag,
+  createUserLike,
+  getUserLike,
+  getLikedTag,
+  getDislikedTag,
 } = require('../controllers/user.controller');
 
-const userValidator = (user) => {
-  const schema = Joi.object({
-    username: Joi.string().min(3).required(),
-    password: Joi.string().min(5).required(),
-    email: Joi.string().email(),
-  });
+router.get('/', checkToken, all);
 
-  return schema.validate(user);
-};
+router.get('/:id', checkToken, find);
 
-// Find All Users
-router.get('/', checkToken, async (req, res, next) => {
-  const users = await getAllUsers();
-  res.json(users);
-});
+router.post('/', create);
 
-// Create User
-router.post('/', async (req, res, next) => {
-  const { valid } = userValidator(req.body);
-  if (valid) {
-    res.status(400).send(valid);
-  }
-  try {
-    const result = await createUser(req.body);
-    if (result.success) {
-      res.status(201).send(result);
-    } else {
-      res.status(401).send(result);
-    }
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
+router.post('/:id/userlikes', checkToken, createUserLike);
 
-// GetOne by email
-router.get('/:email', checkToken, async (req, res) => {
-  const { username } = req.params;
-  const user = await getUserByEmail(username);
-  res.json(user);
-});
+router.post('/:id/likedtags', checkToken, createLikedTag);
 
-// GetOne by Id
-router.get('/id/:id', checkToken, async (req, res) => {
-  const id = ObjectId(req.params.id);
-  const user = await getUserById(id);
-  res.json(user);
-});
+router.post('/:id/dislikedtags', checkToken, createDislikedTag);
 
-// Delete user
-router.delete('/:id', checkToken, async (req, res) => {
-  const id = ObjectId(req.params.id);
-  await deleteUser(id, res);
-  res.json(`User ${req.params.id} deleted`);
-});
+router.get('/:id/userlikes', checkToken, getUserLike);
 
-// Update User
-router.put('/:id', checkToken, async (req, res, next) => {
-  const { valid } = userValidator(req.body);
-  if (valid) {
-    res.status(400).send(valid);
-  }
-  const id = ObjectId(req.params.id);
+router.get('/:id/likedtags', checkToken, getLikedTag);
 
-  await updateUser(id, req.body.username, req.body.password, req.body.correo);
-  res.end(`User ${req.params.id} updated`);
-});
-
-// Update Apartment User
-router.put('/apartment/:id', checkToken, async (req, res, next) => {
-  const id = ObjectId(req.params.id);
-  await updateUserApartment(id, req.body.id_apartment);
-  res.end(`User ${req.params.id} apartment updated`);
-});
+router.get('/:id/dislikedtags', checkToken, getDislikedTag);
 
 module.exports = router;

@@ -3,13 +3,17 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const path = require('path');
+const mongoose = require('mongoose');
 
 require('dotenv').config();
-const { connect } = require('./lib/mongo');
-connect();
+
+const uri = process.env.DB_HOST;
 const app = express();
 
-/* Middleware */
+// middlewares
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 app.use(cors());
 
 app.use(logger('dev'));
@@ -19,14 +23,12 @@ app.use(cookieParser());
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-/* Import Routes */
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/user');
 const authRouter = require('./routes/auth');
 const apartmentRouter = require('./routes/apartment');
 const messageRouter = require('./routes/message');
-
-/* Middleware */
+const tagRouter = require('./routes/tags');
 app.use(cors());
 
 /* Paths */
@@ -35,5 +37,6 @@ app.use('/api', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/apartments', apartmentRouter);
 app.use('/api/messages', messageRouter);
+app.use('/api/tags', tagRouter);
 
 module.exports = app;

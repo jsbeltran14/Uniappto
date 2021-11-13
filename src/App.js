@@ -4,7 +4,7 @@ import { Home } from "./Components/Home/Home";
 import { InicioSesion } from "./Components/InicioSesion/InicioSesion";
 import Rommie from "./Components/Rommies/Rommie";
 import { Chat } from "./Components/Chat/Chat";
-import Viviendas from "./Components/Viviendas/Viviendas";
+import {Viviendas} from "./Components/Viviendas/Viviendas";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {

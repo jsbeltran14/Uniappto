@@ -1,148 +1,93 @@
-const jwt = require('jsonwebtoken');
+const UserModel = require('../models/users');
+const { ObjectId } = require('bson');
 const bcryptjs = require('bcryptjs');
-const { getDbRef } = require('../lib/mongo');
-const { ObjectID, ObjectId } = require('bson');
 
-const COLLECTION_NAME = 'users';
-
-const jwtKey = process.env.JSON_TOKEN;
-
-const getAllUsers = async () => {
-  const users = await getDbRef()
-    .collection(COLLECTION_NAME)
-    .find()
-    .toArray()
-    .catch((error) => console.error(error));
-  return users;
-};
-
-async function getUserByEmail(email) {
-  const user = await getDbRef()
-    .collection(COLLECTION_NAME)
-    .findOne({ email: email });
-  return user;
-}
-
-const emailExists = async (email) => {
-  const existUser = await getUserByEmail(email);
-  return existUser == null;
-};
-
-const getUserById = async (id) => {
-  const user = await getDbRef()
-    .collection(COLLECTION_NAME)
-    .find({ _id: id })
-    .toArray()
-    .catch((error) => console.error(error));
-  return user;
-};
-
-async function createUser(user) {
-  try {
-    const {
-      username,
-      password,
-      email,
-      university,
-      semester,
-      age,
-      phoneNumber,
-    } = user;
-    if (!emailExists(email)) {
-      return {
-        success: false,
-        msg: 'User is already registered',
-      };
-    }
-
+const UserController = {
+  all: async (req, res) => {
+    const allUsers = await UserModel.find();
+    res.json(allUsers);
+  },
+  find: async (req, res) => {
+    const found = await UserModel.find({ _id: ObjectId(req.params.id) });
+    res.json(found);
+  },
+  findByName: async (req, res) => {
+    const found = await UserModel.find({ username: req.body.username });
+    res.json(found);
+  },
+  findByEmail: async (req, res) => {
+    const found = await UserModel.find({ email: req.body.email });
+    console.log(found);
+    return found;
+  },
+  create: async (req, res) => {
     const salt = bcryptjs.genSaltSync();
-    user.password = bcryptjs.hashSync(password, salt);
-
-    await getDbRef().collection(COLLECTION_NAME).insertOne(user);
-    const token = jwt.sign({ username, email }, jwtKey);
-    return {
-      success: true,
-      data: {
-        username: username,
-        email: email,
-        university: university,
-        semester: semester,
-        age: age,
-        phone_number: phoneNumber,
-        id_apartment: null,
-      },
-      token,
-    };
-  } catch (error) {
-    console.log(error);
-    return {
-      success: false,
-      msg: 'Internal error',
-    };
-  }
-}
-
-const deleteUser = async (id, res) => {
-  await getDbRef()
-    .collection(COLLECTION_NAME)
-    .deleteOne({ _id: id })
-    .catch((error) => console.error(error));
-};
-
-const updateUser = async (
-  id,
-  username,
-  password,
-  email,
-  idApartment,
-  university,
-  semester,
-  age,
-  phoneNumber
-) => {
-  await getDbRef()
-    .collection(COLLECTION_NAME)
-    .findOneAndUpdate(
-      { _id: id },
+    const currentUser = req.body;
+    currentUser.password = bcryptjs.hashSync(currentUser.password, salt);
+    const newUser = new UserModel(currentUser);
+    const savedUser = await newUser.save();
+    res.json(savedUser);
+  },
+  createLikedTag: async (req, res) => {
+    const changedUser = await UserModel.findByIdAndUpdate(
+      ObjectId(req.params.id),
       {
-        $set: {
-          username: username,
-          password: password,
-          email: email,
-          university: university,
-          semester: semester,
-          age: age,
-          phone_number: phoneNumber,
-          id_apartment: idApartment,
+        $push: {
+          liked_tags: {
+            _id: req.body.liked_tag_id,
+          },
         },
       },
-      { upsert: true }
-    )
-    .catch((error) => console.error(error));
-};
-
-const updateUserApartment = async (id, idApartment) => {
-  const currentUser = await getUserById(id);
-  currentUser['id_apartment'] = idApartment;
-
-  await getDbRef()
-    .collection(COLLECTION_NAME)
-    .findOneAndUpdate(
-      { _id: id },
+      { new: true, useFindAndModify: false }
+    );
+    res.json(changedUser);
+  },
+  createDislikedTag: async (req, res) => {
+    const changedUser = await UserModel.findByIdAndUpdate(
+      ObjectId(req.params.id),
       {
-        $set: currentUser,
+        $push: {
+          disliked_tags: {
+            _id: req.body.disliked_tag_id,
+          },
+        },
       },
-      { upsert: true }
-    )
-    .catch((error) => console.error(error));
+      { new: true, useFindAndModify: false }
+    );
+    res.json(changedUser);
+  },
+  createUserLike: async (req, res) => {
+    const changedUser = await UserModel.findByIdAndUpdate(
+      ObjectId(req.params.id),
+      {
+        $push: {
+          user_likes: {
+            _id: req.body.liked_user_id,
+          },
+        },
+      },
+      { new: true, useFindAndModify: false }
+    );
+    res.json(changedUser);
+  },
+  getUserLike: async (req, res) => {
+    const found = await UserModel.find({
+      _id: ObjectId(req.params.id),
+    }).populate('user_likes');
+    res.json(found);
+  },
+  getLikedTag: async (req, res) => {
+    const found = await UserModel.find({
+      _id: ObjectId(req.params.id),
+    }).populate('liked_tags');
+    res.json(found);
+  },
+  getDislikedTag: async (req, res) => {
+    const found = await UserModel.find({
+      _id: ObjectId(req.params.id),
+    }).populate('disliked_tags');
+    res.json(found);
+  },
 };
 
-module.exports = {
-  getAllUsers,
-  createUser,
-  getUserByEmail,
-  getUserById,
-  deleteUser,
-  updateUser,
-  updateUserApartment,
-};
+module.exports = UserController;

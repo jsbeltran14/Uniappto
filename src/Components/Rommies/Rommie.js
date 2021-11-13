@@ -7,6 +7,7 @@ import { CardRoomie } from "../CardRoomie/CardRoomie";
 
 
 
+
 export default function Rommie(){
   const isAuthenticated = sessionStorage.getItem("token") !== null;
 
@@ -68,8 +69,11 @@ export default function Rommie(){
           <div className="imagen__roomie">
             <span className="fa fa-check fa-5x positive"></span>
           </div>
+
         </div>
-      </>
+       
+      
+    </>
     )
-  );
+  )
 };

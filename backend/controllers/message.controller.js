@@ -1,63 +1,20 @@
-const { getDbRef } = require('../lib/mongo');
+const MessageModel = require('../models/message');
+const { ObjectId } = require('bson');
 
-const COLLECTION_NAME = 'massages';
-
-const findAllMessages = async () => {
-  const messages = await getDbRef()
-    .collection(COLLECTION_NAME)
-    .find()
-    .toArray()
-    .catch((error) => console.error(error));
-  return messages;
+const MessageController = {
+  all: async (req, res) => {
+    const allMessages = await MessageModel.find();
+    res.json(allMessages);
+  },
+  find: async (req, res) => {
+    const found = await MessageModel.find({ _id: ObjectId(req.params.id) });
+    res.json(found);
+  },
+  create: async (req, res) => {
+    const newMessage = new MessageModel(req.body);
+    const savedMessage = await newMessage.save();
+    res.json(savedMessage);
+  },
 };
 
-const findOneMessage = async (id) => {
-  const message = await getDbRef()
-    .collection(COLLECTION_NAME)
-    .find({ _id: id })
-    .toArray()
-    .catch((error) => console.error(error));
-  return message;
-};
-
-const createMessage = async (req, idSender, idReceiver) => {
-  await getDbRef()
-    .collection(COLLECTION_NAME)
-    .insertOne({
-      sender: idSender,
-      receiver: idReceiver,
-      contenido: req.body.contenido,
-      tipo: req.body.tipo,
-    })
-    .catch((error) => console.error(error));
-};
-
-const deleteMessage = async (id) => {
-  await getDbRef().collection(COLLECTION_NAME).deleteOne({ _id: id });
-};
-
-const updateMessage = async (id, req) => {
-  await getDbRef()
-    .collection(COLLECTION_NAME)
-    .findOneAndUpdate(
-      { _id: id },
-      {
-        $set: {
-          contenido: req.body.contenido,
-          tipo: req.body.tipo,
-        },
-      },
-      {
-        upsert: true,
-      }
-    )
-    .catch((error) => console.error(error));
-};
-
-module.exports = {
-  findAllMessages,
-  findOneMessage,
-  createMessage,
-  deleteMessage,
-  updateMessage,
-};
+module.exports = MessageController;
