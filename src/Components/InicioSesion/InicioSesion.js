@@ -8,16 +8,18 @@ export const InicioSesion = ({ setIsLogged }) => {
   const [password, setPassword] = useState("");
 
   const apiOrigin = "http://localhost:3001/api";
-  function handleChange(name, value) {
-    if (name === "email") {
-      setEmail(value);
+
+  function handleChange(event) {
+    if (event.target.name === "email") {
+      setEmail(event.target.value);
     } else {
-      setPassword(value);
+      setPassword(event.target.value);
     }
   }
 
   const login = async () => {
     try {
+      console.log(email, password);
       const resp = await fetch(`${apiOrigin}/login`, {
         method: "POST",
         body: JSON.stringify({ email: email, password: password }),
