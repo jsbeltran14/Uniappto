@@ -1,7 +1,8 @@
+
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "../Input/Input";
-import ViviendaItem from "./ViviendaItem";
+import { CardVivienda } from "../CardVivienda/CardVivienda";
 import "./viviendas.css";
 
 export const Viviendas = () => {
@@ -46,6 +47,7 @@ export const Viviendas = () => {
           <Link to="viviendas">
             <h1 className="hero__active">Viviendas</h1>
           </Link>
+
         </div>
         <div className="seccion__hero ">
           <Link to="roomies">
@@ -97,7 +99,9 @@ export const Viviendas = () => {
             handleChange={handleChangeEstratoInput}
           />
 
+
           <button className="filter__button">Ingresar</button>
+
         </div>
         <div className="list__viviendas__container">
           {apartamentos &&
@@ -111,22 +115,26 @@ export const Viviendas = () => {
                 housing_type,
                 stratum,
                 zone,
+                picture_url
               }) =>
                 housing_type.startsWith(tipo) &&
                 (estrato === 0 || estrato === stratum) &&
                 zone.startsWith(zona) &&
                 (presupuesto === 0 || presupuesto === price) && (
-                  <ViviendaItem
+                  <CardVivienda
                     key={_id}
+                    picture_url={picture_url}
                     price={price}
                     area={area_mtsc}
-                    bathrooms={bathrooms}
                     bedrooms={bedrooms}
+                    bathrooms={bathrooms}
                   />
                 )
             )}
         </div>
+
       </div>
     </div>
   );
 };
+
