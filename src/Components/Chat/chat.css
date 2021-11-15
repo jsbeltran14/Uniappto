@@ -21,6 +21,11 @@
   margin-top: 2rem;
 }
 
+.contactos__chat > .contacto__chat:hover {
+  cursor: pointer;
+  background-color: rgb(173, 173, 173);
+}
+
 .contacto__chat {
   display: flex;
   flex-direction: row;
