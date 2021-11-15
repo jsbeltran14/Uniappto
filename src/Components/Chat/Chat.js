@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "../Input/Input";
 import "./chat.css";
+import SideBarItem from "./SideBarItem";
 
 export const Chat = () => {
   const token = sessionStorage.getItem("token");
@@ -13,6 +14,9 @@ export const Chat = () => {
   const [usuarios, setUsuarios] = useState([]);
   const [usuarioActual, setUsuarioActual] = useState({});
 
+  // Logged user
+  const [loggedUser, setLoggedUser] = useState({});
+
   useEffect(() => {
     fetch(`${apiOrigin}api/users`, {
       headers: {
@@ -21,6 +25,8 @@ export const Chat = () => {
     })
       .then((data) => data.json())
       .then((res) => setUsuarios(res));
+
+    setLoggedUser(JSON.parse(sessionStorage.getItem("current_user")));
   }, [token]);
 
   const handleChatItemClick = (usuario) => {
@@ -51,15 +57,15 @@ export const Chat = () => {
               (usuario) =>
                 usuario.username
                   .toLowerCase()
-                  .startsWith(searchUser.toLowerCase()) && (
-                  <div
+                  .startsWith(searchUser.toLowerCase()) &&
+                loggedUser.username !== usuario.username && (
+                  <SideBarItem
                     key={usuario._id}
-                    className="contacto__chat"
-                    onClick={() => handleChatItemClick(usuario)}
-                  >
-                    <img alt="" src={usuario.pic_url} />
-                    <h3>{usuario.username}</h3>
-                  </div>
+                    handleChatItemClick={handleChatItemClick}
+                    url={usuario.pic_url}
+                    username={usuario.username}
+                    usuario={usuario}
+                  />
                 )
             )}
         </div>
