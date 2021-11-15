@@ -17,8 +17,18 @@ const UserController = {
   },
   findByEmail: async (req, res) => {
     const found = await UserModel.find({ email: req.body.email });
-    console.log(found);
     return found;
+  },
+  updateUser: async (req, res) => {
+    const found = await UserModel.findByIdAndUpdate(ObjectId(req.params.id), {
+      age: req.body.age,
+      career: req.body.career,
+      pic_url: req.body.pic_url,
+      username: req.body.username,
+      university: req.body.university,
+      semester: req.body.semester,
+    });
+    res.json(found);
   },
   create: async (req, res) => {
     const salt = bcryptjs.genSaltSync();
@@ -71,19 +81,19 @@ const UserController = {
     res.json(changedUser);
   },
   getUserLike: async (req, res) => {
-    const found = await UserModel.find({
+    const found = await UserModel.findOne({
       _id: ObjectId(req.params.id),
     }).populate('user_likes');
     res.json(found);
   },
   getLikedTag: async (req, res) => {
-    const found = await UserModel.find({
+    const found = await UserModel.findOne({
       _id: ObjectId(req.params.id),
     }).populate('liked_tags');
     res.json(found);
   },
   getDislikedTag: async (req, res) => {
-    const found = await UserModel.find({
+    const found = await UserModel.findOne({
       _id: ObjectId(req.params.id),
     }).populate('disliked_tags');
     res.json(found);
