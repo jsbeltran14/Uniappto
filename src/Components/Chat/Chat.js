@@ -6,8 +6,12 @@ export const Chat = () => {
   const token = sessionStorage.getItem("token");
   const apiOrigin = "http://localhost:3001/";
 
-  let [usuarios, setUsuarios] = useState([]);
-  let [usuarioActual, setUsuarioActual] = useState({});
+  // state for filter
+  const [searchUser, setSearchUser] = useState("");
+
+  // User management
+  const [usuarios, setUsuarios] = useState([]);
+  const [usuarioActual, setUsuarioActual] = useState({});
 
   useEffect(() => {
     fetch(`${apiOrigin}api/users`, {
@@ -23,6 +27,9 @@ export const Chat = () => {
     setUsuarioActual(usuario);
   };
 
+  const handleSearchFilter = (event) => {
+    setSearchUser(event.target.value);
+  };
   return (
     <div className="chat__container">
       <div className="sidebar__chat">
@@ -34,21 +41,27 @@ export const Chat = () => {
               type: "text",
               placeholder: "Buscar",
             }}
+            handleChange={handleSearchFilter}
           />
         </div>
 
         <div className="contactos__chat">
           {usuarios &&
-            usuarios.map((usuario) => (
-              <div
-                key={usuario._id}
-                className="contacto__chat"
-                onClick={() => handleChatItemClick(usuario)}
-              >
-                <img alt="" src={usuario.pic_url} />
-                <h3>{usuario.username}</h3>
-              </div>
-            ))}
+            usuarios.map(
+              (usuario) =>
+                usuario.username
+                  .toLowerCase()
+                  .startsWith(searchUser.toLowerCase()) && (
+                  <div
+                    key={usuario._id}
+                    className="contacto__chat"
+                    onClick={() => handleChatItemClick(usuario)}
+                  >
+                    <img alt="" src={usuario.pic_url} />
+                    <h3>{usuario.username}</h3>
+                  </div>
+                )
+            )}
         </div>
       </div>
       <div className="messages__chat">
