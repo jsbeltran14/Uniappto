@@ -38,7 +38,7 @@ export const InicioSesion = ({ setIsLogged }) => {
     if (account) {
       const data = await login();
       if (data.success === true) {
-        sessionStorage.setItem("current_user", JSON.stringify(data));
+        sessionStorage.setItem("current_user", JSON.stringify(data.data));
         console.log(data);
         sessionStorage.setItem("token", data.token);
       }

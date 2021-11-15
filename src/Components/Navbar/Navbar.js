@@ -23,9 +23,11 @@ export const Navbar = () => {
           </Link>
         </div>
         <div>
-          <a href="!#" className="info__item">
-            <strong>Editar perfil</strong>
-          </a>
+         
+          <Link to="/EditarPerfil" className="info__item">
+          <strong>Editar perfil</strong>
+          </Link>
+          
         </div>
       </div>
     </div>
