@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "../Input/Input";
@@ -18,13 +17,13 @@ export const Viviendas = () => {
 
   // filters handlers
   const handleChangeZonaInput = (event) => {
-    setZona(event.target.value);
+    setZona(event.target.value.toLowerCase());
   };
   const handleChangePresupuestoInput = (event) => {
     setPresupuesto(Number(event.target.value));
   };
   const handleChangeTipoInput = (event) => {
-    setTipo(event.target.value);
+    setTipo(event.target.value.toLowerCase());
   };
   const handleChangeEstratoInput = (event) => {
     setEstrato(Number(event.target.value));
@@ -47,7 +46,6 @@ export const Viviendas = () => {
           <Link to="viviendas">
             <h1 className="hero__active">Viviendas</h1>
           </Link>
-
         </div>
         <div className="seccion__hero ">
           <Link to="roomies">
@@ -99,9 +97,7 @@ export const Viviendas = () => {
             handleChange={handleChangeEstratoInput}
           />
 
-
           <button className="filter__button">Ingresar</button>
-
         </div>
         <div className="list__viviendas__container">
           {apartamentos &&
@@ -115,11 +111,11 @@ export const Viviendas = () => {
                 housing_type,
                 stratum,
                 zone,
-                picture_url
+                picture_url,
               }) =>
-                housing_type.startsWith(tipo) &&
+                housing_type.toLowerCase().startsWith(tipo) &&
                 (estrato === 0 || estrato === stratum) &&
-                zone.startsWith(zona) &&
+                zone.toLowerCase().startsWith(zona) &&
                 (presupuesto === 0 || presupuesto === price) && (
                   <CardVivienda
                     key={_id}
@@ -132,9 +128,7 @@ export const Viviendas = () => {
                 )
             )}
         </div>
-
       </div>
     </div>
   );
 };
-

@@ -21,17 +21,15 @@
   height: 500px;
 }
 
-.roomies__container{
-  
+.roomies__container {
   flex: 0.6;
   justify-content: center;
-  
 }
 
 .card__roomie {
   display: flex;
   flex-direction: column;
-  border: 1px solid lightgrey;
+  border: 0.0625rem solid lightgrey;
   border-radius: 22px;
   background-color: #ededed;
   padding-bottom: 10px;
@@ -41,8 +39,7 @@
   margin-right: 5rem;
   width: 350px;
   height: 550px;
-  box-shadow: 0 20px 25px 0 rgba(0,0,0,0.356);
-  
+  align-self: center;
 }
 
 .img__card img {
@@ -81,17 +78,15 @@
 }
 
 .negative {
-  
   color: #fc9295;
 }
 
-.fa-5x{
+.fa-5x {
   flex: 0.2;
 }
 
-.swipe{
-	position: absolute;
-	top: calc(50% - 20%);
-	left: calc(50% - 20%);
- 
+.swipe {
+  position: absolute;
+  top: calc(50% - 20%);
+  left: calc(50% - 20%);
 }

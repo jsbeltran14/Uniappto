@@ -19,7 +19,6 @@ export const InicioSesion = ({ setIsLogged }) => {
 
   const login = async () => {
     try {
-      console.log(email, password);
       const resp = await fetch(`${apiOrigin}/login`, {
         method: "POST",
         body: JSON.stringify({ email: email, password: password }),
@@ -39,7 +38,6 @@ export const InicioSesion = ({ setIsLogged }) => {
       const data = await login();
       if (data.success === true) {
         sessionStorage.setItem("current_user", JSON.stringify(data.data));
-        console.log(data);
         sessionStorage.setItem("token", data.token);
       }
     }

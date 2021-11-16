@@ -15,13 +15,22 @@
   height: 80vh;
   border-right: 1px solid #d3d3d3;
   flex: 0.3;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .contactos__chat {
   margin-top: 2rem;
 }
 
+.contactos__chat > .contacto__chat:hover {
+  cursor: pointer;
+  background-color: rgb(173, 173, 173);
+}
+
 .contacto__chat {
+  margin-left: 2%;
+  width: 96%;
   display: flex;
   flex-direction: row;
   border-radius: 22px;
