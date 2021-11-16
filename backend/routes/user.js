@@ -14,12 +14,13 @@ const {
   getLikedTag,
   getDislikedTag,
   updateUser,
-  why,
 } = require('../controllers/user.controller');
 
 router.get('/', checkToken, all);
 
 router.get('/:id', checkToken, find);
+
+router.put('/:id', checkToken, updateUser);
 
 router.post('/', create);
 
@@ -35,6 +36,6 @@ router.get('/:id/likedtags', checkToken, getLikedTag);
 
 router.get('/:id/dislikedtags', checkToken, getDislikedTag);
 
-router.put('/:id/update',updateUser);
+router.put('/:id/update', updateUser);
 
 module.exports = router;
