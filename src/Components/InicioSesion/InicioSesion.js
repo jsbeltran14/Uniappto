@@ -38,7 +38,7 @@ export const InicioSesion = ({ setIsLogged }) => {
     if (account) {
       const data = await login();
       if (data.success === true) {
-        sessionStorage.setItem("current_user", JSON.stringify(data));
+        sessionStorage.setItem("current_user", JSON.stringify(data.data));
         console.log(data);
         sessionStorage.setItem("token", data.token);
       }
@@ -75,7 +75,6 @@ export const InicioSesion = ({ setIsLogged }) => {
           <button onClick={handleSubmit} className="login__button">
             Ingresar
           </button>
-          {/* TODO: Just authenticated users*/}
         </Link>
       </div>
     </div>
