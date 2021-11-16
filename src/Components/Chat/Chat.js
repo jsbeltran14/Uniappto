@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "../Input/Input";
 import "./chat.css";
+import ChatMessage from "./ChatMessage";
 import SideBarItem from "./SideBarItem";
 
 export const Chat = () => {
@@ -17,8 +18,15 @@ export const Chat = () => {
   // Logged user
   const [loggedUser, setLoggedUser] = useState({});
 
+  // mensaje
+  const [mensaje, setmensaje] = useState("");
+  const [mensajesEnviados, setMensajesEnviados] = useState([]);
+
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     fetch(`${apiOrigin}api/users`, {
+      signal: signal,
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -27,6 +35,7 @@ export const Chat = () => {
       .then((res) => setUsuarios(res));
 
     setLoggedUser(JSON.parse(sessionStorage.getItem("current_user")));
+    return () => controller.abort();
   }, [token]);
 
   const handleChatItemClick = (usuario) => {
@@ -36,6 +45,14 @@ export const Chat = () => {
   const handleSearchFilter = (event) => {
     setSearchUser(event.target.value);
   };
+
+  const handleMensajeChange = (event) => {
+    setmensaje(event.target.value);
+  };
+  const handleSubmitMensaje = () => {
+    setMensajesEnviados([...mensajesEnviados, mensaje]);
+  };
+
   return (
     <div className="chat__container">
       <div className="sidebar__chat">
@@ -76,7 +93,13 @@ export const Chat = () => {
           <h3>{usuarioActual.username}</h3>
         </div>
 
-        <div className="body__chat"></div>
+        <div className="body__chat">
+          <ChatMessage mensaje="Hola Juan" mensaje_propio={"no"} />
+          {mensajesEnviados &&
+            mensajesEnviados.map((mensaje) => (
+              <ChatMessage mensaje={mensaje} mensaje_propio={"si"} />
+            ))}
+        </div>
 
         <div className="input__messages__chat">
           <Input
@@ -86,9 +109,12 @@ export const Chat = () => {
               type: "text",
               placeholder: "",
             }}
+            handleChange={handleMensajeChange}
           />
-
-          <span className="fa fa-arrow-circle-right fa-2x "></span>
+          <span
+            className="fa fa-arrow-circle-right fa-2x "
+            onClick={handleSubmitMensaje}
+          ></span>
         </div>
       </div>
     </div>

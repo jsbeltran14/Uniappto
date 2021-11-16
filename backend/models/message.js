@@ -8,6 +8,7 @@ const MessageSchema = new Schema({
     sender_id: { type: Schema.Types.ObjectId, ref: 'User' },
     receiver_id: { type: Schema.Types.ObjectId, ref: 'User' },
   },
+  createAt: { type: Date, requiered: true },
 });
 
 module.exports = mongoose.model('Message', MessageSchema);

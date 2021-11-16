@@ -1,108 +1,102 @@
 .container__edit {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    background-color: azure;
-  }
-  
-  .edit__titulo {
-    margin-right: 5rem;
-  }
-  
-  .edit__titulo h1 {
-    font-size: 64px;
-  }
-  
-  .edit__card {
-    display: flex;
-    box-shadow: 0 4px 10px 2px rgb(64 60 67 / 16%);
-    flex-direction: column;
-    align-items: center;
-    border: 1px solid lightgrey;
-    border-radius: 22px;
-    background-color: #ededed;
-    padding-bottom: 10px;
-    padding-top: 20px;
-    margin-top: 10px;
-    margin-bottom: 10rem;
-    margin-right: 5rem;
-    width: 40.25rem;
-    height: 40.25rem;
-    
-     
-  }
-  
-  
-  .edit__card h2 {
-    margin-top: 3rem;
-  }
-  
-  .edit__button {
-    background-color: #3483fa;
-    width: 7.75rem;
-    height: 3.125rem;
-    color: gainsboro;
-    border-radius: 0.125rem;
-    border: none;
-    margin-top: 5rem;
-    margin-bottom: 2rem;
-    margin-left: 2rem;
-    margin-right: 2rem;
-    font-size: 1rem;
-  }
-  #userName{
-    width: 15.75rem;
-    height: 1.125rem;
-    border: 2px solid black;
-    float: left;
-    margin: bottom 10px;
-    
-    
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+}
 
-  }
-  #age{
-    width: 15.75rem;
-    height: 1.125rem;
-    border: 2px solid black;
+.edit__titulo {
+  margin-right: 5rem;
+}
 
+.edit__titulo h1 {
+  font-size: 64px;
+}
 
-  }#university{
-    width: 15.75rem;
-    height: 1.125rem;
-    border: 2px solid black;
+.container__edit .form__input {
+  padding: 2.5%;
+  margin: 2%;
+  border: 0.09rem solid #8a8a8a;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  height: 1rem;
+  width: 30rem;
+}
 
+.edit__card {
+  display: flex;
+  box-shadow: 0 4px 10px 2px rgb(64 60 67 / 16%);
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid lightgrey;
+  border-radius: 22px;
+  background-color: #ededed;
+  padding-bottom: 10px;
+  padding-top: 20px;
+  margin-top: 10px;
+  margin-bottom: 10rem;
+  margin-right: 5rem;
+  width: 40.25rem;
+  height: 40.25rem;
+}
 
-  }#career{
-    width: 15.75rem;
-    height: 1.125rem;
-    border: 2px solid black;
+.edit__card h2 {
+  margin-top: 3rem;
+}
 
+.edit__button {
+  background-color: #277dff;
+  width: 7.75rem;
+  height: 3.125rem;
+  color: rgb(255, 255, 255);
+  border-radius: 0.125rem;
+  border: none;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  font-size: 1rem;
+}
+#userName {
+  width: 15.75rem;
+  height: 1.125rem;
+  border: 2px solid black;
+  float: left;
+  margin: bottom 10px;
+}
+#age {
+  width: 15.75rem;
+  height: 1.125rem;
+  border: 2px solid black;
+}
+#university {
+  width: 15.75rem;
+  height: 1.125rem;
+  border: 2px solid black;
+}
+#career {
+  width: 15.75rem;
+  height: 1.125rem;
+  border: 2px solid black;
+}
+#semester {
+  width: 15.75rem;
+  height: 1.125rem;
+  border: 2px solid black;
+}
+#picture {
+  width: 15.75rem;
+  height: 1.125rem;
+  border: 2px solid black;
+}
 
-  }#semester{
-    width: 15.75rem;
-    height: 1.125rem;
-    border: 2px solid black;
+.textE {
+  color: rgb(37, 37, 37);
+  outline-color: black;
+  padding-top: 10px;
+}
 
-
-  }
-  #picture{
-    width: 15.75rem;
-    height: 1.125rem;
-    border: 2px solid black;
-
-
-  }
-
-  .textE{
-      color:rgb(143, 135, 135);
-      outline-color: black;
-      padding-top: 10px;;
-  }
-  
-  #imagenUSer{
-    
-    border: 2px solid black;}
-
-  
-  
+#imagenUSer {
+  border: 2px solid black;
+}
