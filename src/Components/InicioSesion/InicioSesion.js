@@ -75,7 +75,6 @@ export const InicioSesion = ({ setIsLogged }) => {
           <button onClick={handleSubmit} className="login__button">
             Ingresar
           </button>
-          {/* TODO: Just authenticated users*/}
         </Link>
       </div>
     </div>
