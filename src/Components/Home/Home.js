@@ -19,10 +19,12 @@ export const Home = () => {
         </Link>
         <div className="registrar">
           <p className="registrar__item">¿No tienes cuenta?</p>
-          <a className="registrar__item" href="/registro">
+          <Link to="/registrar">
+          <p className="registrar__item" >
             {" "}
             Registrate Aquí
-          </a>
+          </p>
+          </Link>
         </div>
       </div>
     </div>

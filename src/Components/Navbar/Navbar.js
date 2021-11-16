@@ -23,8 +23,8 @@ export const Navbar = () => {
           </Link>
         </div>
         <div>
-          <Link to="/registrar" className="info__item">
-            <strong>Editar perfil</strong>
+          <Link to="/EditarPerfil" className="info__item">
+          <strong>Editar perfil</strong>
           </Link>
         </div>
       </div>
