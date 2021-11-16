@@ -23,11 +23,9 @@ export const Navbar = () => {
           </Link>
         </div>
         <div>
-         
           <Link to="/EditarPerfil" className="info__item">
           <strong>Editar perfil</strong>
           </Link>
-          
         </div>
       </div>
     </div>
