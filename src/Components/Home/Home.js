@@ -1,9 +1,13 @@
 import React from "react";
 import "./styles.css";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export const Home = () => {
 
+  const handleSubmit = () => {
+    sessionStorage.removeItem("current_user");
+    window.location.reload(false);
+  };
 
   return (
     <div className="container">
@@ -39,7 +43,7 @@ export const Home = () => {
         </Link>
         <div className="registrar">
           <p className="registrar__item">¿deseas cerrar sesion?</p>
-          <Link to="/">
+          <Link to="/" onClick={handleSubmit}>
           <p className="registrar__item" >
             {" "}
             Cerrar Sesion
