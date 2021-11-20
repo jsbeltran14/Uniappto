@@ -12,7 +12,13 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="info">
-        <div>
+      {sessionStorage.getItem("current_user") == null ? (
+          <>
+           
+          </>
+        ) : (
+          <>
+             <div>
           <Link to="/" className="info__item">
             <strong>Viviendas favoritas</strong>
           </Link>
@@ -27,6 +33,9 @@ export const Navbar = () => {
           <strong>Editar perfil</strong>
           </Link>
         </div>
+          </>
+        )}
+        
       </div>
     </div>
   );

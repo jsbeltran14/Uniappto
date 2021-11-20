@@ -3,6 +3,8 @@ import "./styles.css";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
+
+
   return (
     <div className="container">
       <div className="imagen">
@@ -14,7 +16,10 @@ export const Home = () => {
           ¡Encuentra la mejor opción de vivienda universitaria con tus roomies
           preferidos!
         </h3>
-        <Link to="/login">
+        
+        {sessionStorage.getItem("current_user") == null ? (
+          <>
+            <Link to="/login">
           <button>Iniciar Sesion</button>
         </Link>
         <div className="registrar">
@@ -26,6 +31,23 @@ export const Home = () => {
           </p>
           </Link>
         </div>
+          </>
+        ) : (
+          <>
+            <Link to="/roomies">
+          <button>Busca Roomies</button>
+        </Link>
+        <div className="registrar">
+          <p className="registrar__item">¿deseas cerrar sesion?</p>
+          <Link to="/">
+          <p className="registrar__item" >
+            {" "}
+            Cerrar Sesion
+          </p>
+          </Link>
+        </div>
+          </>
+        )}
       </div>
     </div>
   );
