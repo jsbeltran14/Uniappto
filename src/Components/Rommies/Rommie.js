@@ -28,6 +28,25 @@ export default function Rommie() {
     return () => controller.abort();
   }, [token]);
 
+  const handleMatch = (direction, user_id) => {
+    const current_user_id = loggedUser._id;
+    const match = direction === "right";
+    console.log(token);
+    console.log(user_id);
+    if (match) {
+      fetch(`${apiOrigin}api/users/${current_user_id}/userlikes`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          liked_user_id: `${user_id}`,
+        }),
+      });
+    }
+  };
+
   return (
     <>
       {/* BREADCRUMBS */}
@@ -60,6 +79,7 @@ export default function Rommie() {
                     className="swipe"
                     key={element._id}
                     preventSwipe={["up", "down"]}
+                    onSwipe={(direction) => handleMatch(direction, element._id)}
                   >
                     <CardRoomie
                       key={element._id}

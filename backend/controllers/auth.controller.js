@@ -25,6 +25,7 @@ async function login(user) {
           msg: 'Logged successfully',
           token,
           data: {
+            _id: currentUser._id,
             age: currentUser.age,
             career: currentUser.career,
             email: currentUser.email,

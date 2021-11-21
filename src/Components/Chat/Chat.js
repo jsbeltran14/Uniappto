@@ -24,8 +24,10 @@ export const Chat = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    const signal = controller.signal;
-    fetch(`${apiOrigin}api/users`, {
+    setLoggedUser(JSON.parse(sessionStorage.getItem("current_user")));
+    const { signal } = controller;
+
+    fetch(`${apiOrigin}api/users/${loggedUser._id}/matches`, {
       signal: signal,
       headers: {
         Authorization: `Bearer ${token}`,
@@ -34,9 +36,8 @@ export const Chat = () => {
       .then((data) => data.json())
       .then((res) => setUsuarios(res));
 
-    setLoggedUser(JSON.parse(sessionStorage.getItem("current_user")));
     return () => controller.abort();
-  }, [token]);
+  }, [loggedUser._id, token]);
 
   const handleChatItemClick = (usuario) => {
     setUsuarioActual(usuario);

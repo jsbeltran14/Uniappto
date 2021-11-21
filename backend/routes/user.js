@@ -14,6 +14,7 @@ const {
   getLikedTag,
   getDislikedTag,
   updateUser,
+  getMatches,
 } = require('../controllers/user.controller');
 
 router.get('/', checkToken, all);
@@ -31,6 +32,8 @@ router.post('/:id/likedtags', checkToken, createLikedTag);
 router.post('/:id/dislikedtags', checkToken, createDislikedTag);
 
 router.get('/:id/userlikes', checkToken, getUserLike);
+
+router.get('/:id/matches', checkToken, getMatches);
 
 router.get('/:id/likedtags', checkToken, getLikedTag);
 
