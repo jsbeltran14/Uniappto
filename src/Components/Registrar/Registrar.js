@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import { Input } from "../Input/Input";
 import { Link } from "react-router-dom";
 import "./styles.css";
 
 export const Registrar = () => {
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,11 +13,9 @@ export const Registrar = () => {
   function handleChange(event) {
     if (event.target.name === "name") {
       setName(event.target.value);
-    }
-    else if (event.target.name === "email") {
+    } else if (event.target.name === "email") {
       setEmail(event.target.value);
-    } 
-    else if (event.target.name === "password") {
+    } else if (event.target.name === "password") {
       setPassword(event.target.value);
     }
   }
@@ -27,8 +24,16 @@ export const Registrar = () => {
     try {
       const resp = await fetch(`${apiOrigin}/users`, {
         method: "POST",
-        body: JSON.stringify({ username:name , email: email, password: password
-                              , age:20, career:"none", pic_url:"none", university:"none", semester:"none" }),
+        body: JSON.stringify({
+          username: name,
+          email: email,
+          password: password,
+          age: 20,
+          career: "none",
+          pic_url: "none",
+          university: "none",
+          semester: "none",
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -49,13 +54,13 @@ export const Registrar = () => {
     }
   };
 
-    return (
-        <div className="container__login">
+  return (
+    <div className="container__login">
       <div className="login__titulo">
         <h1>Registrar</h1>
       </div>
       <div className="registrar__card">
-      <h2>Nombre</h2>
+        <h2>Nombre</h2>
         <Input
           attribute={{
             id: "name",
@@ -102,5 +107,5 @@ export const Registrar = () => {
         </Link>
       </div>
     </div>
-    )
-}
+  );
+};

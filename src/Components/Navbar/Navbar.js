@@ -12,30 +12,27 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="info">
-      {sessionStorage.getItem("current_user") == null ? (
-          <>
-           
-          </>
+        {sessionStorage.getItem("current_user") == null ? (
+          <></>
         ) : (
           <>
-             <div>
-          <Link to="/" className="info__item">
-            <strong>Viviendas favoritas</strong>
-          </Link>
-        </div>
-        <div>
-          <Link to="/chat" className="info__item">
-            <strong>Chat</strong>
-          </Link>
-        </div>
-        <div>
-          <Link to="/EditarPerfil" className="info__item">
-          <strong>Editar perfil</strong>
-          </Link>
-        </div>
+            <div>
+              <Link to="/" className="info__item">
+                <strong>Viviendas favoritas</strong>
+              </Link>
+            </div>
+            <div>
+              <Link to="/chat" className="info__item">
+                <strong>Chat</strong>
+              </Link>
+            </div>
+            <div>
+              <Link to="/EditarPerfil" className="info__item">
+                <strong>Editar perfil</strong>
+              </Link>
+            </div>
           </>
         )}
-        
       </div>
     </div>
   );
