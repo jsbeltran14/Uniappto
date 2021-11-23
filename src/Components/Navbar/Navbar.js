@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({ isLogged = false }) => {
   return (
     <div className="header">
       <div className="inicio">
@@ -12,9 +12,7 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="info">
-        {sessionStorage.getItem("current_user") == null ? (
-          <></>
-        ) : (
+        {isLogged && (
           <>
             <div>
               <Link to="/" className="info__item">

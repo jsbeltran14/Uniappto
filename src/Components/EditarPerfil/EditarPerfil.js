@@ -23,7 +23,7 @@ export const EditarPerfil = () => {
         <input
           className="form__input"
           type="text"
-          id="userName"
+          id="userNameEditar"
           name="userName"
           placeholder={usuarioActual.username}
         />
@@ -34,7 +34,7 @@ export const EditarPerfil = () => {
         <input
           className="form__input"
           type="text"
-          id="age"
+          id="ageEditar"
           name="age"
           placeholder={usuarioActual.age}
         />
@@ -45,7 +45,7 @@ export const EditarPerfil = () => {
         <input
           className="form__input"
           type="text"
-          id="university"
+          id="universityEditar"
           name="university"
           placeholder={usuarioActual.university}
         />
@@ -56,7 +56,7 @@ export const EditarPerfil = () => {
         <input
           className="form__input"
           type="text"
-          id="career"
+          id="careerEditar"
           name="career"
           placeholder={usuarioActual.career}
         />
@@ -67,7 +67,7 @@ export const EditarPerfil = () => {
         <input
           className="form__input"
           type="text"
-          id="semester"
+          id="semesterEditar"
           name="semester"
           placeholder={usuarioActual.semester}
         />

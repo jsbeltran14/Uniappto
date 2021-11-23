@@ -1,26 +1,20 @@
-import React, { useState } from "react";
-import { Input } from "../Input/Input";
-import { Link } from "react-router-dom";
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useHistory } from "react-router-dom";
 import "./styles.css";
 
 export const Registrar = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const apiOrigin = "http://localhost:3001/api";
 
-  function handleChange(event) {
-    if (event.target.name === "name") {
-      setName(event.target.value);
-    } else if (event.target.name === "email") {
-      setEmail(event.target.value);
-    } else if (event.target.name === "password") {
-      setPassword(event.target.value);
-    }
-  }
-
-  const postUser = async () => {
+  const postUser = async (
+    name,
+    email,
+    password,
+    age,
+    career,
+    university,
+    semester
+  ) => {
     try {
       const resp = await fetch(`${apiOrigin}/users`, {
         method: "POST",
@@ -28,11 +22,12 @@ export const Registrar = () => {
           username: name,
           email: email,
           password: password,
-          age: 20,
-          career: "none",
-          pic_url: "none",
-          university: "none",
-          semester: "none",
+          age: age,
+          career: career,
+          pic_url:
+            "https://www.expohip.com/app/uploads/sites/2/2021/01/fake-232.jpg",
+          university: university,
+          semester: semester,
         }),
         headers: {
           "Content-Type": "application/json",
@@ -44,67 +39,91 @@ export const Registrar = () => {
     }
   };
 
-  const handleSubmit = async () => {
-    const account = { name, email, password };
-    if (account) {
-      const data = await postUser();
-      if (data.success === true) {
-        console.log("usuario creado");
-      }
-    }
-  };
-
   return (
     <div className="container__login">
       <div className="login__titulo">
-        <h1>Registrar</h1>
+        <h1>Registro</h1>
       </div>
       <div className="registrar__card">
-        <h2>Nombre</h2>
-        <Input
-          attribute={{
-            id: "name",
-            name: "name",
-            type: "text",
-            placeholder: "Nombre",
+        <Formik
+          initialValues={{
+            name: "",
+            email: "",
+            password: "",
+            age: "",
+            career: "",
+            university: "",
+            semester: "",
           }}
-          handleChange={handleChange}
-        />
-        <h2>Email o Telefono</h2>
-        <Input
-          attribute={{
-            id: "email",
-            name: "email",
-            type: "text",
-            placeholder: "Email o número telefónico",
+          onSubmit={(valores, { resetForm }) => {
+            resetForm();
+            const { name, email, password, age, career, university, semester } =
+              valores;
+            postUser(name, email, password, age, career, university, semester);
+            console.log("Formulario enviado");
           }}
-          handleChange={handleChange}
-        />
-        <h2>Contraseña</h2>
-        <Input
-          attribute={{
-            id: "password",
-            name: "password",
-            type: "password",
-            placeholder: "Contraseña",
-          }}
-          handleChange={handleChange}
-        />
-        <h2>Repetir Contraseña</h2>
-        <Input
-          attribute={{
-            id: "password2",
-            name: "password2",
-            type: "password",
-            placeholder: "Contraseña",
-          }}
-          handleChange={handleChange}
-        />
-        <Link to="/">
-          <button onClick={handleSubmit} className="login__button">
-            Registrarse
-          </button>
-        </Link>
+        >
+          {({ errors }) => (
+            <Form className="formulario">
+              <div>
+                <label htmlFor="name">Nombre</label>
+                <Field
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Juan Perez"
+                />
+              </div>
+              <div>
+                <label htmlFor="email">Correo</label>
+                <Field
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="juan@uniappto.com"
+                />
+              </div>
+              <div>
+                <label htmlFor="password">Contraseña</label>
+                <Field type="password" id="password" name="password" />
+              </div>
+              <div>
+                <label htmlFor="age">Edad</label>
+                <Field type="number" id="age" name="age" placeholder="19" />
+              </div>
+              <div>
+                <label htmlFor="university">Universidad</label>
+                <Field
+                  type="university"
+                  id="university"
+                  name="university"
+                  placeholder="Universidad de los Andes"
+                />
+              </div>
+              <div>
+                <label htmlFor="career">Carrera</label>
+                <Field
+                  type="career"
+                  id="career"
+                  name="career"
+                  placeholder="Ingeniería Industrial"
+                />
+              </div>
+              <div>
+                <label htmlFor="semester">Semestre</label>
+                <Field
+                  type="semester"
+                  id="semester"
+                  name="semester"
+                  placeholder="Primer Semestre"
+                />
+              </div>
+              <button className="login__button" type="submit">
+                Registrarse
+              </button>
+            </Form>
+          )}
+        </Formik>
       </div>
     </div>
   );

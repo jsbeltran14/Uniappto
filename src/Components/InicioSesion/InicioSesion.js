@@ -3,7 +3,7 @@ import { Input } from "../Input/Input";
 import "./styles.css";
 import { useHistory } from "react-router-dom";
 
-export const InicioSesion = () => {
+export const InicioSesion = ({ handleIsLogged }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -41,6 +41,7 @@ export const InicioSesion = () => {
       if (data.success === true) {
         sessionStorage.setItem("current_user", JSON.stringify(data.data));
         sessionStorage.setItem("token", data.token);
+        handleIsLogged(true);
         history.push("/roomies");
       }
     }
