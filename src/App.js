@@ -35,7 +35,7 @@ function App() {
           <Registrar />
         </Route>
         <Route path="/editarPerfil">
-          <EditarPerfil />
+          <EditarPerfil handleIsLogged={handleIsLogged} />
         </Route>
       </Switch>
     </Router>
