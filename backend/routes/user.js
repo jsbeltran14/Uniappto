@@ -40,9 +40,4 @@ router.get('/:id/likedtags', checkToken, getLikedTag);
 
 router.get('/:id/dislikedtags', checkToken, getDislikedTag);
 
-router.put('/:id/update', updateUser);
-
-router.get('/:id/search', getUserById);
-
-
 module.exports = router;

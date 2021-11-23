@@ -6,13 +6,13 @@ import "./EditarPerfil.css";
 
 export const EditarPerfil = ({ handleIsLogged }) => {
   const [usuarioActual, setUsuarioActual] = useState({});
-  
+
   const [username, setUserName] = useState(usuarioActual.username);
   const [age, setAge] = useState(usuarioActual.age);
   const [semester, setSemester] = useState(usuarioActual.semester);
   const [university, setUniversity] = useState(usuarioActual.universisty);
   const [career, setCareer] = useState(usuarioActual.career);
-  
+
   const apiOrigin = "http://localhost:3001/api";
 
   useEffect(() => {
@@ -23,11 +23,9 @@ export const EditarPerfil = ({ handleIsLogged }) => {
     }
   }, [handleIsLogged]);
 
-  
-
   const putUser = async () => {
     try {
-      const resp = await fetch(`${apiOrigin}/users/${usuarioActual._id}/update`, {
+      const resp = await fetch(`${apiOrigin}/users/${usuarioActual._id}`, {
         method: "PUT",
         body: JSON.stringify({
           username: username,
@@ -47,12 +45,9 @@ export const EditarPerfil = ({ handleIsLogged }) => {
   };
 
   const handleSubmit = async () => {
-    const account = { username, age, career,university,semester };
+    const account = { username, age, career, university, semester };
     if (account) {
-      const data = await putUser();
-      if (data.success === true) {
-        console.log("usuario actualizado");
-      }
+      putUser();
     }
   };
 
@@ -63,9 +58,9 @@ export const EditarPerfil = ({ handleIsLogged }) => {
       setAge(event.target.value);
     } else if (event.target.name === "university") {
       setUniversity(event.target.value);
-    }else if (event.target.name === "career") {
+    } else if (event.target.name === "career") {
       setCareer(event.target.value);
-    }else if (event.target.name === "semester") {
+    } else if (event.target.name === "semester") {
       setSemester(event.target.value);
     }
   }
@@ -80,12 +75,12 @@ export const EditarPerfil = ({ handleIsLogged }) => {
           Nombre de usuario
         </label>
         <Input
-        attribute={{
-          type:"text",
-          id:"userName",
-          name:"userName",
-          placeholder:username
-        }}
+          attribute={{
+            type: "text",
+            id: "userName",
+            name: "userName",
+            placeholder: username,
+          }}
           handleChange={handleChange}
         />
 
@@ -93,12 +88,12 @@ export const EditarPerfil = ({ handleIsLogged }) => {
           Edad
         </label>
         <Input
-        attribute={{
-          type:"text",
-          id:"age",
-          name:"age",
-          placeholder:age
-        }}
+          attribute={{
+            type: "text",
+            id: "age",
+            name: "age",
+            placeholder: age,
+          }}
           handleChange={handleChange}
         />
 
@@ -107,41 +102,44 @@ export const EditarPerfil = ({ handleIsLogged }) => {
         </label>
         <Input
           attribute={{
-          type:"text",
-          id:"university",
-          name:"university",
-          placeholder:university
-        }}handleChange={handleChange}
+            type: "text",
+            id: "university",
+            name: "university",
+            placeholder: university,
+          }}
+          handleChange={handleChange}
         />
 
         <label className="textE" htmlFor="career">
           Carrera
         </label>
         <Input
-        attribute={{
-          type:"text",
-          id:"career",
-          name:"career",
-          placeholder:career,
-          }}handleChange={handleChange}
-
+          attribute={{
+            type: "text",
+            id: "career",
+            name: "career",
+            placeholder: career,
+          }}
+          handleChange={handleChange}
         />
 
         <label className="textE" htmlFor="semester">
           Semestre
         </label>
         <Input
-        attribute={{
-          type:"text",
-          id:"semester",
-          name:"semester",
-          placeholder:semester
-        }}handleChange={handleChange}
-
+          attribute={{
+            type: "text",
+            id: "semester",
+            name: "semester",
+            placeholder: semester,
+          }}
+          handleChange={handleChange}
         />
 
         <div className="row">
-          <button className="edit__button" onClick={handleSubmit}>Realizar</button>
+          <button className="edit__button" onClick={handleSubmit}>
+            Realizar
+          </button>
 
           <Link to="/roomies">
             <button className="edit__button">Cancelar</button>
