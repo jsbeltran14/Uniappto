@@ -76,7 +76,6 @@ export const EditarPerfil = () => {
         <label className="textE" htmlFor="us">
           Nombre de usuario
         </label>
-<<<<<<< HEAD
         <Input
         attribute={{
           type:"text",
@@ -85,20 +84,11 @@ export const EditarPerfil = () => {
           placeholder:username
         }}
           handleChange={handleChange}
-=======
-        <input
-          className="form__input"
-          type="text"
-          id="userNameEditar"
-          name="userName"
-          placeholder={usuarioActual.username}
->>>>>>> d10bd9a00ce9fad737b039044314d5884aff147c
         />
 
         <label className="textE" htmlFor="age">
           Edad
         </label>
-<<<<<<< HEAD
         <Input
         attribute={{
           type:"text",
@@ -107,20 +97,11 @@ export const EditarPerfil = () => {
           placeholder:age
         }}
           handleChange={handleChange}
-=======
-        <input
-          className="form__input"
-          type="text"
-          id="ageEditar"
-          name="age"
-          placeholder={usuarioActual.age}
->>>>>>> d10bd9a00ce9fad737b039044314d5884aff147c
         />
 
         <label className="textE" htmlFor="university">
           Universidad
         </label>
-<<<<<<< HEAD
         <Input
           attribute={{
           type:"text",
@@ -128,20 +109,11 @@ export const EditarPerfil = () => {
           name:"university",
           placeholder:university
         }}handleChange={handleChange}
-=======
-        <input
-          className="form__input"
-          type="text"
-          id="universityEditar"
-          name="university"
-          placeholder={usuarioActual.university}
->>>>>>> d10bd9a00ce9fad737b039044314d5884aff147c
         />
 
         <label className="textE" htmlFor="career">
           Carrera
         </label>
-<<<<<<< HEAD
         <Input
         attribute={{
           type:"text",
@@ -150,20 +122,11 @@ export const EditarPerfil = () => {
           placeholder:career,
           }}handleChange={handleChange}
 
-=======
-        <input
-          className="form__input"
-          type="text"
-          id="careerEditar"
-          name="career"
-          placeholder={usuarioActual.career}
->>>>>>> d10bd9a00ce9fad737b039044314d5884aff147c
         />
 
         <label className="textE" htmlFor="semester">
           Semestre
         </label>
-<<<<<<< HEAD
         <Input
         attribute={{
           type:"text",
@@ -172,14 +135,6 @@ export const EditarPerfil = () => {
           placeholder:semester
         }}handleChange={handleChange}
 
-=======
-        <input
-          className="form__input"
-          type="text"
-          id="semesterEditar"
-          name="semester"
-          placeholder={usuarioActual.semester}
->>>>>>> d10bd9a00ce9fad737b039044314d5884aff147c
         />
 
         <div className="row">
