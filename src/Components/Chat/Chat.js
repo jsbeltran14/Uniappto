@@ -4,7 +4,7 @@ import "./chat.css";
 import ChatMessage from "./ChatMessage";
 import SideBarItem from "./SideBarItem";
 
-export const Chat = () => {
+export const Chat = ({ handleIsLogged }) => {
   const token = sessionStorage.getItem("token");
   const apiOrigin = "http://localhost:3001/";
 
@@ -24,20 +24,23 @@ export const Chat = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-    setLoggedUser(JSON.parse(sessionStorage.getItem("current_user")));
-    const { signal } = controller;
+    if (sessionStorage.getItem("current_user")) {
+      setLoggedUser(JSON.parse(sessionStorage.getItem("current_user")));
+      const { signal } = controller;
+      handleIsLogged(true);
 
-    fetch(`${apiOrigin}api/users/${loggedUser._id}/matches`, {
-      signal: signal,
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((data) => data.json())
-      .then((res) => setUsuarios(res));
+      fetch(`${apiOrigin}api/users/${loggedUser._id}/matches`, {
+        signal: signal,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((data) => data.json())
+        .then((res) => setUsuarios(res));
+    }
 
     return () => controller.abort();
-  }, [loggedUser._id, token]);
+  }, [loggedUser._id, token, handleIsLogged]);
 
   const handleChatItemClick = (usuario) => {
     setUsuarioActual(usuario);

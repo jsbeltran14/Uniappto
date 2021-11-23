@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import TinderCard from "react-tinder-card";
 import { CardRoomie } from "../CardRoomie/CardRoomie";
 
-export default function Rommie() {
+export default function Rommie({ handleIsLogged }) {
   const token = sessionStorage.getItem("token");
   const apiOrigin = "http://localhost:3001/";
 
@@ -24,9 +24,12 @@ export default function Rommie() {
         .then((data) => data.json())
         .then((res) => setroomieDisp(res));
     }
-    setloggedUser(JSON.parse(sessionStorage.getItem("current_user")));
+    if (sessionStorage.getItem("current_user")) {
+      setloggedUser(JSON.parse(sessionStorage.getItem("current_user")));
+      handleIsLogged(true);
+    }
     return () => controller.abort();
-  }, [token]);
+  }, [handleIsLogged, token]);
 
   const handleMatch = (direction, user_id) => {
     const current_user_id = loggedUser._id;

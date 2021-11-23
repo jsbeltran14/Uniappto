@@ -23,13 +23,13 @@ function App() {
           <InicioSesion handleIsLogged={handleIsLogged} />
         </Route>
         <Route path="/roomies">
-          <Rommie />
+          <Rommie handleIsLogged={handleIsLogged} />
         </Route>
         <Route path="/chat">
-          <Chat />
+          <Chat handleIsLogged={handleIsLogged} />
         </Route>
         <Route path="/viviendas">
-          <Viviendas />
+          <Viviendas handleIsLogged={handleIsLogged} />
         </Route>
         <Route path="/registrar">
           <Registrar />

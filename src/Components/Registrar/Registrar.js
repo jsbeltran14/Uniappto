@@ -1,10 +1,11 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import { useHistory } from "react-router-dom";
 import "./styles.css";
 
 export const Registrar = () => {
   const apiOrigin = "http://localhost:3001/api";
+  const history = useHistory();
 
   const postUser = async (
     name,
@@ -60,7 +61,7 @@ export const Registrar = () => {
             const { name, email, password, age, career, university, semester } =
               valores;
             postUser(name, email, password, age, career, university, semester);
-            console.log("Formulario enviado");
+            history.push("/");
           }}
         >
           {({ errors }) => (

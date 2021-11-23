@@ -109,7 +109,10 @@ const UserController = {
 
     user_likes.forEach((user_like) => {
       user_like.user_likes.forEach((user) => {
-        if (user.toString() === current_id.toString()) {
+        if (
+          user.toString() === current_id.toString() &&
+          !matches.includes(user_like)
+        ) {
           matches = [...matches, user_like];
         }
       });

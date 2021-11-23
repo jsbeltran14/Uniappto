@@ -3,13 +3,16 @@ import { Link } from "react-router-dom";
 
 import "./EditarPerfil.css";
 
-export const EditarPerfil = () => {
+export const EditarPerfil = ({ handleIsLogged }) => {
   const [usuarioActual, setUsuarioActual] = useState({});
 
   useEffect(() => {
     const usuarioActual = sessionStorage.getItem("current_user");
-    setUsuarioActual(JSON.parse(usuarioActual));
-  }, []);
+    if (usuarioActual) {
+      setUsuarioActual(JSON.parse(usuarioActual));
+      handleIsLogged(true);
+    }
+  }, [handleIsLogged]);
 
   return (
     <div className="container__edit">
