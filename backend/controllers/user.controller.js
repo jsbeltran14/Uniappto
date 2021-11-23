@@ -116,6 +116,15 @@ const UserController = {
     });
     res.json(matches);
   },
+
+  getUserById: async(req,res)=>{
+    const found= await UserModel.findById({_id : ObjectId(req.params.id)}
+      
+    );
+
+    res.json(found);
+  },
+
 };
 
 module.exports = UserController;
