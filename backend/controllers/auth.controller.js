@@ -25,6 +25,7 @@ async function login(user) {
           msg: 'Logged successfully',
           token,
           data: {
+            id: currentUser.id,
             age: currentUser.age,
             career: currentUser.career,
             email: currentUser.email,
@@ -35,6 +36,7 @@ async function login(user) {
             user_likes: currentUser.user_likes,
             liked_tags: currentUser.liked_tags,
             disliked_tags: currentUser.disliked_tags,
+            liked_apartments: currentUser.liked_apartments,
           },
         };
       }

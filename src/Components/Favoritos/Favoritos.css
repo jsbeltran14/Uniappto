@@ -1,0 +1,12 @@
+.vivienda__container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-radius: 22px;
+    background-color: #ededed;
+    margin-left: 4rem;
+    width: 700px;
+    height: 150px;
+    margin-bottom: 2rem;
+  }

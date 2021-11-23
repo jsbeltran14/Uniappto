@@ -39,6 +39,7 @@ export const InicioSesion = ({ setIsLogged }) => {
       if (data.success === true) {
         sessionStorage.setItem("current_user", JSON.stringify(data.data));
         sessionStorage.setItem("token", data.token);
+        sessionStorage.setItem("user_Id", data.data.id);
       }
     }
   };

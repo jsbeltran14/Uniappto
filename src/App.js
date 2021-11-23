@@ -7,6 +7,7 @@ import { Chat } from "./Components/Chat/Chat";
 import {Viviendas} from "./Components/Viviendas/Viviendas";
 import { Registrar } from "./Components/Registrar/Registrar";
 import { EditarPerfil} from "./Components/EditarPerfil/EditarPerfil";
+import { Favoritos} from "./Components/Favoritos/Favoritos";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function App() {
@@ -35,6 +36,9 @@ function App() {
         </Route>
         <Route path="/editarPerfil">
           <EditarPerfil isLogged={isLogged} />
+        </Route>
+        <Route path="/favoritos">
+          <Favoritos/>
         </Route>
       </Switch>
     </Router>

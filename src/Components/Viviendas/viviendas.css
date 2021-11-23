@@ -14,8 +14,9 @@
 .hero__active {
   text-align: center;
   background-color: #ededed;
-  width: 150px;
-  border-radius: 10px;
+  width: 500px;
+  border-radius: 100px;
+  color: blueviolet;
 }
 
 .filtro__viviendas__container {
@@ -111,4 +112,7 @@
 
 .positive {
   color: #3483fa;
+}
+.heart {
+  transform: scale(0.7,0.7);
 }

@@ -1,16 +1,63 @@
-import React from 'react'
-
+import React, { useState, useEffect } from "react";
+import Heart from "react-animated-heart";
 export const CardVivienda = (props) => {
 
+    const token = sessionStorage.getItem("token");
+    const apiOrigin = "http://localhost:3001/";
+ 
+
     const {
+        key,
+        id,
         picture_url,
         price,
         area,
         bedrooms,
         bathrooms
       } = props;
+    const [isClick, setClick] = useState(false);
 
 
+
+
+
+    const handleAgregar = (id) => {
+    const user_id = sessionStorage.getItem("user_Id");
+    console.log(token);
+    console.log(user_id);
+    console.log(id);
+
+      fetch(`${apiOrigin}api/users/${user_id}/likedapartments`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            liked_apartment_id: `${id}`,
+        }),
+      });
+    
+  };
+  
+  const handleEliminar = (id) => {
+    const user_id = sessionStorage.getItem("user_Id");
+    console.log(token);
+    console.log(user_id);
+    console.log(id);
+
+      fetch(`${apiOrigin}api/users/${user_id}/likedapartments`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+            liked_apartment_id: `${id}`,
+        }),
+      });
+    
+  };
     return (
         <div className="vivienda__container">
             <img src={picture_url} alt="" />
@@ -35,8 +82,15 @@ export const CardVivienda = (props) => {
                 </div>
                 <div className="iconos__viviendas">
                     <div className="favoritos__container">
-                        <p className="titulo">añadir a favoritos</p>
-                        <span className="fa fa-heart-o positive"></span>
+                         { isClick ? <p className="titulo">Agregado a favoritos</p>: <p className="titulo">Agregar a favoritos</p> }
+                         <div className="heart">
+                             
+                                <Heart isClick={isClick} onClick={() => {setClick(!isClick); {isClick ? handleAgregar(id): handleEliminar(id)}}} />
+                                <div>
+                               
+                                </div>
+                                
+                        </div>
                     </div>
                     <div className="favoritos__container">
                         <button className="contactar__btn">contactar</button>

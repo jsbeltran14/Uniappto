@@ -119,6 +119,7 @@ export const Viviendas = () => {
                 (presupuesto === 0 || presupuesto === price) && (
                   <CardVivienda
                     key={_id}
+                    id={_id}
                     picture_url={picture_url}
                     price={price}
                     area={area_mtsc}

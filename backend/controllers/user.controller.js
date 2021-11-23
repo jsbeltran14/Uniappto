@@ -98,6 +98,52 @@ const UserController = {
     }).populate('disliked_tags');
     res.json(found);
   },
+  createLikedApartment: async (req, res) => {
+    const changedUser = await UserModel.findByIdAndUpdate(
+      ObjectId(req.params.id),
+      {
+        $push: {
+          liked_apartments: {
+            _id: req.body.liked_apartment_id,
+          },
+        },
+      },
+      { new: true, useFindAndModify: false }
+    );
+    res.json(changedUser);
+  },
+
+  getLikedApartments: async (req, res) => {
+    const found = await UserModel.findOne({
+      _id: ObjectId(req.params.id),
+    }).populate('liked_apartments');
+    res.json(found.liked_apartments);
+  },  
+  //deleteLikedApartment: async (req, res) => {
+  //  const changedUser = await UserModel.findByIdAndUpdate(
+  //    ObjectId(req.params.id),
+  //    {
+  //      $pull: {
+  //        liked_apartments: {
+  //          _id: req.body.liked_apartment_id,
+  //        },
+  //      },
+  //    },
+  //    { new: true, useFindAndModify: false }
+  //  );
+  //  res.json(changedUser);
+  //},
+  deleteLikedApartment: async (req, res) => {
+
+    const changedUser = await UserModel.findByIdAndUpdate(
+      ObjectId(req.params.id),
+      {
+        $pull: { liked_apartments: req.body.liked_apartment_id}, 
+        
+      }, {new: true, useFindAndModify: false,multi:true});
+    res.json(changedUser);
+  },
 };
+
 
 module.exports = UserController;

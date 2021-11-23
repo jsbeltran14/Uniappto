@@ -14,6 +14,7 @@ const UserSchema = new Schema({
   user_likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   liked_tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
   disliked_tags: [{ type: Schema.Types.ObjectId, ref: 'Tag' }],
+  liked_apartments: [{ type: Schema.Types.ObjectId, ref: 'Apartment' }],
 });
 
 module.exports = mongoose.model('User', UserSchema);
