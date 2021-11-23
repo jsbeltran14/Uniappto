@@ -31,8 +31,6 @@ export default function Rommie() {
   const handleMatch = (direction, user_id) => {
     const current_user_id = loggedUser._id;
     const match = direction === "right";
-    console.log(token);
-    console.log(user_id);
     if (match) {
       fetch(`${apiOrigin}api/users/${current_user_id}/userlikes`, {
         method: "POST",
