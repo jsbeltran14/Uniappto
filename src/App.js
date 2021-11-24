@@ -39,7 +39,7 @@ function App() {
           <EditarPerfil handleIsLogged={handleIsLogged} />
         </Route>
         <Route path="/favoritos">
-          <Favoritos/>
+          <Favoritos handleIsLogged={handleIsLogged}/>
         </Route>
       </Switch>
     </Router>
