@@ -19,18 +19,16 @@ export const Chat = ({ handleIsLogged }) => {
   const [loggedUser, setLoggedUser] = useState({});
 
   // mensaje
-  const [mensaje, setmensaje] = useState("");
+  const [mensaje, setMensaje] = useState("");
   const [mensajesEnviados, setMensajesEnviados] = useState([]);
+  const [conversaciones, setConversaciones] = useState([]);
 
   useEffect(() => {
-    const controller = new AbortController();
     if (sessionStorage.getItem("current_user")) {
       setLoggedUser(JSON.parse(sessionStorage.getItem("current_user")));
-      const { signal } = controller;
       handleIsLogged(true);
 
       fetch(`${apiOrigin}api/users/${loggedUser._id}/matches`, {
-        signal: signal,
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,9 +36,17 @@ export const Chat = ({ handleIsLogged }) => {
         .then((data) => data.json())
         .then((res) => setUsuarios(res));
     }
-
-    return () => controller.abort();
   }, [loggedUser._id, token, handleIsLogged]);
+
+  useEffect(() => {
+    fetch(`${apiOrigin}api/api/conversation/${loggedUser._id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((data) => data.json())
+      .then((res) => setConversaciones(res));
+  });
 
   const handleChatItemClick = (usuario) => {
     setUsuarioActual(usuario);
@@ -51,10 +57,13 @@ export const Chat = ({ handleIsLogged }) => {
   };
 
   const handleMensajeChange = (event) => {
-    setmensaje(event.target.value);
+    setMensaje(event.target.value);
   };
-  const handleSubmitMensaje = () => {
+
+  const handleSubmitMensaje = (event) => {
+    event.preventDefault();
     setMensajesEnviados([...mensajesEnviados, mensaje]);
+    setMensaje("");
   };
 
   return (
@@ -98,28 +107,31 @@ export const Chat = ({ handleIsLogged }) => {
         </div>
 
         <div className="body__chat">
-          <ChatMessage mensaje="Hola Juan" mensaje_propio={"no"} />
           {mensajesEnviados &&
-            mensajesEnviados.map((mensaje) => (
-              <ChatMessage mensaje={mensaje} mensaje_propio={"si"} />
+            mensajesEnviados.map((mensaje, index) => (
+              <ChatMessage
+                key={index}
+                mensaje={mensaje}
+                mensaje_propio={"si"}
+              />
             ))}
         </div>
 
-        <div className="input__messages__chat">
-          <Input
-            attribute={{
-              id: "mensaje",
-              name: "mensaje",
-              type: "text",
-              placeholder: "",
-            }}
-            handleChange={handleMensajeChange}
+        <form className="input__messages__chat" onSubmit={handleSubmitMensaje}>
+          <input
+            className="form__input"
+            name="mensaje"
+            type="text"
+            placeholder="Enviar mensaje"
+            value={mensaje}
+            onChange={handleMensajeChange}
+            required
           />
-          <span
+          <button
+            type="submit"
             className="fa fa-arrow-circle-right fa-2x "
-            onClick={handleSubmitMensaje}
-          ></span>
-        </div>
+          ></button>
+        </form>
       </div>
     </div>
   );
