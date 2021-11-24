@@ -28,6 +28,7 @@ const usersRouter = require('./routes/user');
 const authRouter = require('./routes/auth');
 const apartmentRouter = require('./routes/apartment');
 const messageRouter = require('./routes/message');
+const conversationRouter = require('./routes/conversation');
 const tagRouter = require('./routes/tags');
 app.use(cors());
 
@@ -37,6 +38,7 @@ app.use('/api', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/apartments', apartmentRouter);
 app.use('/api/messages', messageRouter);
+app.use('/api/conversation', conversationRouter);
 app.use('/api/tags', tagRouter);
 
 module.exports = app;

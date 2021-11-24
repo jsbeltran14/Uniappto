@@ -2,18 +2,20 @@ const MessageModel = require('../models/message');
 const { ObjectId } = require('bson');
 
 const MessageController = {
-  all: async (req, res) => {
-    const allMessages = await MessageModel.find();
-    res.json(allMessages);
-  },
   find: async (req, res) => {
-    const found = await MessageModel.find({ _id: ObjectId(req.params.id) });
+    const found = await MessageModel.find({
+      conversationId: ObjectId(req.params.conversationId),
+    });
     res.json(found);
   },
   create: async (req, res) => {
     const newMessage = new MessageModel(req.body);
-    const savedMessage = await newMessage.save();
-    res.json(savedMessage);
+    try {
+      const savedMessage = await newMessage.save();
+      res.status(200).json(savedMessage);
+    } catch (err) {
+      res.status(500).json(err);
+    }
   },
 };
 
