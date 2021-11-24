@@ -114,5 +114,7 @@
   color: #3483fa;
 }
 .heart {
+  height: 100px;
+  width: 100px;
   transform: scale(0.7,0.7);
 }

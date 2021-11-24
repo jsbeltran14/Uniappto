@@ -84,19 +84,40 @@ const UserController = {
     const found = await UserModel.findOne({
       _id: ObjectId(req.params.id),
     }).populate('user_likes');
-    res.json(found);
+    res.json(found.user_likes);
   },
   getLikedTag: async (req, res) => {
     const found = await UserModel.findOne({
       _id: ObjectId(req.params.id),
     }).populate('liked_tags');
-    res.json(found);
+    res.json(found.liked_tags);
   },
   getDislikedTag: async (req, res) => {
     const found = await UserModel.findOne({
       _id: ObjectId(req.params.id),
     }).populate('disliked_tags');
-    res.json(found);
+    res.json(found.disliked_tags);
+  },
+  getMatches: async (req, res) => {
+    const current_user = await UserModel.findOne({
+      _id: ObjectId(req.params.id),
+    }).populate('user_likes');
+
+    const user_likes = current_user.user_likes;
+    const current_id = current_user._id;
+    let matches = [];
+
+    user_likes.forEach((user_like) => {
+      user_like.user_likes.forEach((user) => {
+        if (
+          user.toString() === current_id.toString() &&
+          !matches.includes(user_like)
+        ) {
+          matches = [...matches, user_like];
+        }
+      });
+    });
+    res.json(matches);
   },
   createLikedApartment: async (req, res) => {
     const changedUser = await UserModel.findByIdAndUpdate(

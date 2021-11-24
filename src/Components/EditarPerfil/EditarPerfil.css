@@ -58,34 +58,34 @@
   margin-right: 2rem;
   font-size: 1rem;
 }
-#userName {
+#userNameEditar {
   width: 15.75rem;
   height: 1.125rem;
   border: 2px solid black;
   float: left;
   margin: bottom 10px;
 }
-#age {
+#ageEditar {
   width: 15.75rem;
   height: 1.125rem;
   border: 2px solid black;
 }
-#university {
+#universityEditar {
   width: 15.75rem;
   height: 1.125rem;
   border: 2px solid black;
 }
-#career {
+#careerEditar {
   width: 15.75rem;
   height: 1.125rem;
   border: 2px solid black;
 }
-#semester {
+#semesterEditar {
   width: 15.75rem;
   height: 1.125rem;
   border: 2px solid black;
 }
-#picture {
+#pictureEditar {
   width: 15.75rem;
   height: 1.125rem;
   border: 2px solid black;
@@ -97,6 +97,6 @@
   padding-top: 10px;
 }
 
-#imagenUSer {
+/* #imagenUSer {
   border: 2px solid black;
-}
+} */

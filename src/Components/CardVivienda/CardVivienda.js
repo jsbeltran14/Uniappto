@@ -1,31 +1,19 @@
 import React, { useState, useEffect } from "react";
 import Heart from "react-animated-heart";
 export const CardVivienda = (props) => {
+  const { id, picture_url, price, area, bedrooms, bathrooms, favorito } = props;
 
     const token = sessionStorage.getItem("token");
     const apiOrigin = "http://localhost:3001/";
  
 
-    const {
-        key,
-        id,
-        picture_url,
-        price,
-        area,
-        bedrooms,
-        bathrooms
-      } = props;
-    const [isClick, setClick] = useState(false);
-
-
-
-
+    const [isclicked, setClick] = useState(favorito);
 
     const handleAgregar = (id) => {
-    const user_id = sessionStorage.getItem("user_Id");
-    console.log(token);
-    console.log(user_id);
-    console.log(id);
+        const user_id = sessionStorage.getItem("user_Id");
+        console.log(token);
+        console.log(user_id);
+        console.log(id);
 
       fetch(`${apiOrigin}api/users/${user_id}/likedapartments`, {
         method: "POST",
@@ -39,7 +27,7 @@ export const CardVivienda = (props) => {
       });
     
   };
-  
+
   const handleEliminar = (id) => {
     const user_id = sessionStorage.getItem("user_Id");
     console.log(token);
@@ -58,6 +46,10 @@ export const CardVivienda = (props) => {
       });
     
   };
+    useEffect(()=>{ 
+        setClick(favorito)    
+    },[favorito]);
+  
     return (
         <div className="vivienda__container">
             <img src={picture_url} alt="" />
@@ -82,14 +74,9 @@ export const CardVivienda = (props) => {
                 </div>
                 <div className="iconos__viviendas">
                     <div className="favoritos__container">
-                         { isClick ? <p className="titulo">Agregado a favoritos</p>: <p className="titulo">Agregar a favoritos</p> }
+                         { isclicked ? <p className="titulo">Agregado a favoritos</p>: <p className="titulo">Agregar a favoritos</p> }
                          <div className="heart">
-                             
-                                <Heart isClick={isClick} onClick={() => {setClick(!isClick); {isClick ? handleAgregar(id): handleEliminar(id)}}} />
-                                <div>
-                               
-                                </div>
-                                
+                            <Heart isClick={isclicked} onClick={() => {setClick(!isclicked); {isclicked ? handleEliminar(id): handleAgregar(id)}}} />  
                         </div>
                     </div>
                     <div className="favoritos__container">
@@ -98,5 +85,6 @@ export const CardVivienda = (props) => {
                 </div>
             </div>
         </div>
-    )
-}
+
+  );
+};

@@ -2,7 +2,7 @@ import React from "react";
 import "./styles.css";
 import { Link } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = ({ isLogged = false }) => {
   return (
     <div className="header">
       <div className="inicio">
@@ -12,21 +12,25 @@ export const Navbar = () => {
         </Link>
       </div>
       <div className="info">
-        <div>
-          <Link to="/favoritos" className="info__item">
-            <strong>Viviendas favoritas</strong>
-          </Link>
-        </div>
-        <div>
-          <Link to="/chat" className="info__item">
-            <strong>Chat</strong>
-          </Link>
-        </div>
-        <div>
-          <Link to="/EditarPerfil" className="info__item">
-          <strong>Editar perfil</strong>
-          </Link>
-        </div>
+        {isLogged && (
+          <>
+            <div>
+              <Link to="/favoritos" className="info__item">
+                <strong>Viviendas favoritas</strong>
+              </Link>
+            </div>
+            <div>
+              <Link to="/chat" className="info__item">
+                <strong>Chat</strong>
+              </Link>
+            </div>
+            <div>
+              <Link to="/EditarPerfil" className="info__item">
+                <strong>Editar perfil</strong>
+              </Link>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

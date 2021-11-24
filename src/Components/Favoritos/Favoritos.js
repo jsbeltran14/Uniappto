@@ -7,28 +7,10 @@ export const Favoritos = () => {
     const apiOrigin = "http://localhost:3001/";
     const [apartamentos, setApartamentos] = useState([]);
 
-    const [aptoDisp, setaptoDisp] = useState(null);
-    const [loggedUser, setloggedUser] = useState({});
-
-    const [isClick, setClick] = useState(true);
+    const [isClick] = useState(true);
 
 
-    useEffect(() => {
-      const controller = new AbortController();
-      const signal = controller.signal;
-      if (token) {
-        fetch(`${apiOrigin}api/users`, {
-          signal: signal,
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((data) => data.json())
-          .then((res) => setaptoDisp(res));
-      }
-      setloggedUser(JSON.parse(sessionStorage.getItem("current_user")));
-      return () => controller.abort();
-    }, [token]);
+
     const user_id = sessionStorage.getItem("user_Id")
     useEffect(() => {
         fetch(`${apiOrigin}api/users/${user_id}/likedapartments`, {
@@ -72,7 +54,7 @@ export const Favoritos = () => {
               area={area_mtsc}
               bedrooms={bedrooms}
               bathrooms={bathrooms}
-              isclick={isClick}
+              favorito={isClick}
             />
           
       )}

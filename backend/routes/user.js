@@ -17,6 +17,8 @@ const {
   createLikedApartment,
   getLikedApartments,
   deleteLikedApartment,
+  getMatches,
+  getUserById,
 } = require('../controllers/user.controller');
 
 router.get('/', checkToken, all);
@@ -36,6 +38,8 @@ router.post('/:id/dislikedtags', checkToken, createDislikedTag);
 router.post('/:id/likedapartments',checkToken, createLikedApartment)
 
 router.get('/:id/userlikes', checkToken, getUserLike);
+
+router.get('/:id/matches', checkToken, getMatches);
 
 router.get('/:id/likedtags', checkToken, getLikedTag);
 

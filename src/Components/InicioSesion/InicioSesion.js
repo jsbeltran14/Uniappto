@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Input } from "../Input/Input";
 import "./styles.css";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-export const InicioSesion = ({ setIsLogged }) => {
+export const InicioSesion = ({ handleIsLogged }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const history = useHistory();
 
   const apiOrigin = "http://localhost:3001/api";
 
@@ -39,7 +41,9 @@ export const InicioSesion = ({ setIsLogged }) => {
       if (data.success === true) {
         sessionStorage.setItem("current_user", JSON.stringify(data.data));
         sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("user_Id", data.data.id);
+        sessionStorage.setItem("user_Id", data.data._id);
+        handleIsLogged(true);
+        history.push("/roomies");
       }
     }
   };
@@ -70,11 +74,9 @@ export const InicioSesion = ({ setIsLogged }) => {
           }}
           handleChange={handleChange}
         />
-        <Link to="/roomies">
-          <button onClick={handleSubmit} className="login__button">
-            Ingresar
-          </button>
-        </Link>
+        <button onClick={handleSubmit} className="login__button">
+          Ingresar
+        </button>
       </div>
     </div>
   );

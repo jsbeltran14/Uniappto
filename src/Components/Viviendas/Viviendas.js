@@ -8,7 +8,7 @@ export const Viviendas = () => {
   const token = sessionStorage.getItem("token");
   const apiOrigin = "http://localhost:3001/";
   const [apartamentos, setApartamentos] = useState([]);
-
+  const [favoritos, setFavoritos] = useState([]);
   // state filters
   const [zona, setZona] = useState("");
   const [presupuesto, setPresupuesto] = useState(0);
@@ -28,6 +28,30 @@ export const Viviendas = () => {
   const handleChangeEstratoInput = (event) => {
     setEstrato(Number(event.target.value));
   };
+
+  function isInArray(id){
+    let ans = false
+    favoritos.forEach(element => {
+      if(element._id===id)
+      {
+        ans = true
+      }
+    });
+    return ans
+  }
+
+  const user_id = sessionStorage.getItem("user_Id")
+  useEffect(() => {
+      fetch(`${apiOrigin}api/users/${user_id}/likedapartments`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((data) => data.json())
+        .then((res) => setFavoritos(res));
+    }, [token]);
 
   useEffect(() => {
     fetch(`${apiOrigin}api/apartments`, {
@@ -125,6 +149,7 @@ export const Viviendas = () => {
                     area={area_mtsc}
                     bedrooms={bedrooms}
                     bathrooms={bathrooms}
+                    favorito={isInArray(_id)}
                   />
                 )
             )}

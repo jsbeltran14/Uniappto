@@ -106,18 +106,20 @@
 
 .mensaje_si {
   margin: 10px;
-  padding: 1px 3% 1px 3%;
+  margin-right: 2rem;
+  padding: 4px 20px;
   background-color: #59008d;
   color: white;
   align-self: flex-end;
-  border-radius: 50% 0% 50% 50%;
+  border-radius: 6px;
 }
 
 .mensaje_no {
   margin: 10px;
-  padding: 1px 3% 1px 3%;
+  margin-left: 2rem;
+  padding: 4px 20px;
   background-color: #005f85;
   color: rgb(255, 255, 255);
   align-self: flex-start;
-  border-radius: 0% 30% 30% 30%;
+  border-radius: 6px;
 }
