@@ -4,7 +4,7 @@ import { Input } from "../Input/Input";
 import { CardVivienda } from "../CardVivienda/CardVivienda";
 import "./viviendas.css";
 
-export const Viviendas = () => {
+export const Viviendas = ({ handleIsLogged }) => {
   const token = sessionStorage.getItem("token");
   const apiOrigin = "http://localhost:3001/";
   const [apartamentos, setApartamentos] = useState([]);
@@ -37,7 +37,8 @@ export const Viviendas = () => {
     })
       .then((data) => data.json())
       .then((res) => setApartamentos(res));
-  }, [token]);
+    if (sessionStorage.getItem("current_user")) handleIsLogged(true);
+  }, [handleIsLogged, token]);
 
   return (
     <div>

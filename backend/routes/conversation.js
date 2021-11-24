@@ -3,10 +3,9 @@ const express = require('express');
 const router = express.Router();
 const { checkToken } = require('../middlewares/jwt-validator');
 
-const { find, create } = require('../controllers/message.controller');
-
-router.get('/:conversationId', checkToken, find);
+const { create, find } = require('../controllers/conversation.controller');
 
 router.post('/', checkToken, create);
+router.get('/:userId', checkToken, find);
 
 module.exports = router;

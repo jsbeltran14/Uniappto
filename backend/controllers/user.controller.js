@@ -1,4 +1,5 @@
 const UserModel = require('../models/users');
+const ConversationModel = require('../models/conversation');
 const { ObjectId } = require('bson');
 const bcryptjs = require('bcryptjs');
 
@@ -117,6 +118,14 @@ const UserController = {
         }
       });
     });
+
+    // Crear conversaciones pero toca arreglarlo
+    // matches.forEach((match) => {
+    //   const newConversation = new ConversationModel({
+    //     members: [current_id, match._id],
+    //   });
+    //   newConversation.save();
+    // });
     res.json(matches);
   },
 };
