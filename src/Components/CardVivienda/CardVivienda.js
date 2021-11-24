@@ -6,7 +6,6 @@ export const CardVivienda = (props) => {
     const token = sessionStorage.getItem("token");
     const apiOrigin = "http://localhost:3001/";
  
-
     const [isclicked, setClick] = useState(favorito);
 
     const handleAgregar = (id) => {
