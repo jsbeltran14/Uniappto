@@ -10,8 +10,14 @@ export const EditarPerfil = ({ handleIsLogged }) => {
   const [username, setUserName] = useState(usuarioActual.username);
   const [age, setAge] = useState(usuarioActual.age);
   const [semester, setSemester] = useState(usuarioActual.semester);
-  const [university, setUniversity] = useState(usuarioActual.universisty);
+  const [university, setUniversity] = useState(usuarioActual.university);
   const [career, setCareer] = useState(usuarioActual.career);
+
+  const usernameA = usuarioActual.username;
+  const ageA = usuarioActual.age;
+  const semesterA = usuarioActual.semester;
+  const universityA = usuarioActual.universisty;
+  const careerA  = usuarioActual.career;
 
   const apiOrigin = "http://localhost:3001/api";
 
@@ -50,7 +56,6 @@ export const EditarPerfil = ({ handleIsLogged }) => {
       putUser();
     }
   };
-
   function handleChange(event) {
     if (event.target.name === "userName") {
       setUserName(event.target.value);
@@ -66,6 +71,7 @@ export const EditarPerfil = ({ handleIsLogged }) => {
   }
 
   return (
+   
     <div className="container__edit">
       <div className="edit__titulo">
         <h1>Mi perfil</h1>{" "}
@@ -79,7 +85,7 @@ export const EditarPerfil = ({ handleIsLogged }) => {
             type: "text",
             id: "userName",
             name: "userName",
-            placeholder: username,
+            placeholder: usernameA,
           }}
           handleChange={handleChange}
         />
@@ -92,7 +98,7 @@ export const EditarPerfil = ({ handleIsLogged }) => {
             type: "text",
             id: "age",
             name: "age",
-            placeholder: age,
+            placeholder: ageA,
           }}
           handleChange={handleChange}
         />
@@ -105,7 +111,7 @@ export const EditarPerfil = ({ handleIsLogged }) => {
             type: "text",
             id: "university",
             name: "university",
-            placeholder: university,
+            placeholder: universityA,
           }}
           handleChange={handleChange}
         />
@@ -118,7 +124,7 @@ export const EditarPerfil = ({ handleIsLogged }) => {
             type: "text",
             id: "career",
             name: "career",
-            placeholder: career,
+            placeholder: careerA,
           }}
           handleChange={handleChange}
         />
@@ -131,7 +137,7 @@ export const EditarPerfil = ({ handleIsLogged }) => {
             type: "text",
             id: "semester",
             name: "semester",
-            placeholder: semester,
+            placeholder: semesterA,
           }}
           handleChange={handleChange}
         />
