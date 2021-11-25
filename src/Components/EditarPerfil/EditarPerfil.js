@@ -16,7 +16,7 @@ export const EditarPerfil = ({ handleIsLogged }) => {
   const usernameA = usuarioActual.username;
   const ageA = usuarioActual.age;
   const semesterA = usuarioActual.semester;
-  const universityA = usuarioActual.universisty;
+  const universityA = usuarioActual.university;
   const careerA  = usuarioActual.career;
 
   const apiOrigin = "http://localhost:3001/api";
