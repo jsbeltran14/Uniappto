@@ -28,7 +28,7 @@ export const Chat = ({ handleIsLogged }) => {
       setLoggedUser(JSON.parse(sessionStorage.getItem("current_user")));
       handleIsLogged(true);
 
-      fetch(`${apiOrigin}api/users/${loggedUser._id}/matches`, {
+      fetch(`${apiOrigin}api/users/${sessionStorage.getItem('user_Id')}/matches`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,15 +38,6 @@ export const Chat = ({ handleIsLogged }) => {
     }
   }, [loggedUser._id, token, handleIsLogged]);
 
-  useEffect(() => {
-    fetch(`${apiOrigin}api/api/conversation/${loggedUser._id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-      .then((data) => data.json())
-      .then((res) => setConversaciones(res));
-  });
 
   const handleChatItemClick = (usuario) => {
     setUsuarioActual(usuario);
